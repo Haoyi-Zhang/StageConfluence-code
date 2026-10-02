@@ -1,0 +1,10 @@
+case,instance,evidence,verified,reachable_states,edges,local_peaks,state_confluent,unique_terminal_program,modular_criterion,source_equivalent_program
+S01,S01-confluent-bidirectional-diamond,confluence-certificate,True,9,12,4,True,True,True,True
+S02,S02-unjoined-rewrite-peak,nonconfluence-witness,True,9,11,4,False,False,False,False
+S03,S03-closure-commutation-failure,nonconfluence-witness,True,5,4,1,False,False,False,False
+S04,S04-guard-persistence-failure,nonconfluence-witness,True,3,2,1,False,False,False,False
+S07,S07-semantics-breaking-rewrite,confluence-certificate,True,2,1,0,True,True,True,False
+S08,S08-confluent-outside-modular-fragment,confluence-certificate,True,4,4,1,True,True,False,True
+S09,S09-confluent-diamond-with-top-transfer,confluence-certificate,True,7,10,4,True,True,True,True
+S10,S10-program-confluent-state-nonconfluent,nonconfluence-witness,True,4,3,1,False,True,False,True
+S11,S11-unreachable-bad-rewrite,confluence-certificate,True,2,1,0,True,True,True,True

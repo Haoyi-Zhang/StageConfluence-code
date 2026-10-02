@@ -1,0 +1,9 @@
+lattice,states,maps,ordered_map_pairs,cases,incomplete_cases,complete_unique_cases,complete_multiple_cases,formula_mismatches,maximal_guard_checks,persistent_guard_checks,strict_transition_guard_advantage_emitters
+C1,1,1,1,4,2,2,0,0,2,2,0
+C2,2,2,4,64,32,26,6,0,16,16,0
+C3,3,5,25,1600,800,554,246,0,200,200,0
+C4,4,14,196,50176,25088,14942,10146,0,3136,3136,24
+C5,5,42,1764,1806336,903168,466418,436750,0,56448,56448,1064
+B2,4,9,81,20736,10368,7040,3328,0,1296,1296,0
+M3,5,15,225,230400,115200,81632,33568,0,7200,7200,0
+N5,5,21,441,451584,225792,145688,80104,0,14112,14112,48

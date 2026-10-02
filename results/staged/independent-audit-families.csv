@@ -1,0 +1,8 @@
+family,declared_instances,range_start,range_stop_exclusive,instances_checked,instances_with_mismatch,field_comparisons,field_mismatches,mismatch_direct,mismatch_local,mismatch_modular,mismatch_persistent,mismatch_commutes,mismatch_saturated,mismatch_unique_program,mismatch_state_count,mismatch_peak_count
+A-C2-one-rewrite,32,0,32,32,0,288,0,0,0,0,0,0,0,0,0,0
+A-C3-one-rewrite,1000,0,1000,1000,0,9000,0,0,0,0,0,0,0,0,0,0
+A-B2-one-rewrite,11664,0,11664,11664,0,104976,0,0,0,0,0,0,0,0,0,0
+B-C2-fork,512,0,512,512,0,4608,0,0,0,0,0,0,0,0,0,0
+B-B2-fork,262144,0,262144,262144,0,2359296,0,0,0,0,0,0,0,0,0,0
+C-B2-diamond,160000,0,160000,160000,0,1440000,0,0,0,0,0,0,0,0,0,0
+D-B2-two-analysis,16384,0,16384,16384,0,147456,0,0,0,0,0,0,0,0,0,0

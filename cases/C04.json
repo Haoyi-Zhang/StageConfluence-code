@@ -1,0 +1,41 @@
+{
+  "name": "C04",
+  "lattice": {
+    "kind": "chain",
+    "size": 2
+  },
+  "maps": [
+    {
+      "name": "learn",
+      "table": [
+        1,
+        1
+      ]
+    }
+  ],
+  "guard": [
+    true,
+    true
+  ],
+  "emissions": [
+    [
+      "not",
+      [
+        "var",
+        0
+      ]
+    ],
+    [
+      "not",
+      [
+        "var",
+        0
+      ]
+    ]
+  ],
+  "inputs": 1,
+  "source": [
+    "var",
+    0
+  ]
+}

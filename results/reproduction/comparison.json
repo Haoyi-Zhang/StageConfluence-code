@@ -1,0 +1,12 @@
+{
+  "schema": "pvso-reproduction-comparison-2",
+  "runs": [
+    "retained-clean-run",
+    "independently-populated-clean-run"
+  ],
+  "deterministic_files_compared": 94,
+  "equal": true,
+  "resource_files_compared": false,
+  "reason_resource_files_excluded": "Wall time, CPU time, and peak RSS depend on process placement and are not scientific outputs.",
+  "comparison_command": "python compare_results.py results FRESH_RUN"
+}

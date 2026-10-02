@@ -1,0 +1,129 @@
+{
+  "name": "S08-confluent-outside-modular-fragment",
+  "lattice": {
+    "kind": "chain",
+    "size": 2
+  },
+  "fact_labels": [
+    "none",
+    "H"
+  ],
+  "inputs": 1,
+  "source_expression": [
+    "var",
+    0
+  ],
+  "initial_program": "p0",
+  "initial_fact": 0,
+  "programs": [
+    {
+      "name": "p0",
+      "rank": 2,
+      "expression": [
+        "or",
+        [
+          "var",
+          0
+        ],
+        [
+          "const",
+          0
+        ]
+      ],
+      "analyses": [
+        {
+          "name": "discover-history",
+          "direction": "forward",
+          "table": [
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "name": "p1",
+      "rank": 1,
+      "expression": [
+        "and",
+        [
+          "var",
+          0
+        ],
+        [
+          "const",
+          1
+        ]
+      ],
+      "analyses": [
+        {
+          "name": "fixed",
+          "direction": "prophecy",
+          "table": [
+            0,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "name": "p2",
+      "rank": 0,
+      "expression": [
+        "var",
+        0
+      ],
+      "analyses": [
+        {
+          "name": "fixed",
+          "direction": "auxiliary",
+          "table": [
+            0,
+            1
+          ]
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "name": "early-only",
+      "source": "p0",
+      "target": "p1",
+      "guard": [
+        true,
+        false
+      ],
+      "transfer": [
+        1,
+        1
+      ]
+    },
+    {
+      "name": "late-only",
+      "source": "p0",
+      "target": "p2",
+      "guard": [
+        false,
+        true
+      ],
+      "transfer": [
+        0,
+        1
+      ]
+    },
+    {
+      "name": "close-early-path",
+      "source": "p1",
+      "target": "p2",
+      "guard": [
+        true,
+        true
+      ],
+      "transfer": [
+        0,
+        1
+      ]
+    }
+  ]
+}

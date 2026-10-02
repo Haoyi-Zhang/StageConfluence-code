@@ -1,0 +1,109 @@
+{
+  "name": "S03-closure-commutation-failure",
+  "lattice": {
+    "kind": "chain",
+    "size": 2
+  },
+  "fact_labels": [
+    "none",
+    "H"
+  ],
+  "inputs": 1,
+  "source_expression": [
+    "var",
+    0
+  ],
+  "initial_program": "p0",
+  "initial_fact": 0,
+  "programs": [
+    {
+      "name": "p0",
+      "rank": 2,
+      "expression": [
+        "or",
+        [
+          "var",
+          0
+        ],
+        [
+          "const",
+          0
+        ]
+      ],
+      "analyses": [
+        {
+          "name": "discover-history",
+          "direction": "forward",
+          "table": [
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "name": "p1",
+      "rank": 1,
+      "expression": [
+        "var",
+        0
+      ],
+      "analyses": [
+        {
+          "name": "no-new-facts",
+          "direction": "prophecy",
+          "table": [
+            0,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "name": "p2",
+      "rank": 0,
+      "expression": [
+        "var",
+        0
+      ],
+      "analyses": [
+        {
+          "name": "no-new-facts",
+          "direction": "auxiliary",
+          "table": [
+            0,
+            1
+          ]
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "name": "commit-early",
+      "source": "p0",
+      "target": "p1",
+      "guard": [
+        true,
+        true
+      ],
+      "transfer": [
+        0,
+        1
+      ]
+    },
+    {
+      "name": "finish-if-history",
+      "source": "p1",
+      "target": "p2",
+      "guard": [
+        false,
+        true
+      ],
+      "transfer": [
+        0,
+        1
+      ]
+    }
+  ]
+}

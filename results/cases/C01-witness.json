@@ -1,0 +1,24 @@
+{
+  "case": "C01",
+  "kind": "different_syntax",
+  "runs": [
+    [
+      {
+        "op": "emit"
+      },
+      {
+        "map": 0,
+        "op": "apply"
+      }
+    ],
+    [
+      {
+        "map": 0,
+        "op": "apply"
+      },
+      {
+        "op": "emit"
+      }
+    ]
+  ]
+}

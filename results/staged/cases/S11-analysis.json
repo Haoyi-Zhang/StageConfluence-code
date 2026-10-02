@@ -1,0 +1,112 @@
+{
+  "analysis_directions": [
+    "forward",
+    "prophecy"
+  ],
+  "closure_commutation": true,
+  "closure_commutation_failures": [],
+  "edge_count": 1,
+  "exact_local_peak_criterion": true,
+  "fact_height": 0,
+  "global_confluence": true,
+  "guard_persistence": true,
+  "guard_persistence_failures": [],
+  "initial_normal_forms": [
+    [
+      1,
+      0
+    ]
+  ],
+  "instance": {
+    "facts": 1,
+    "initial": [
+      "p0",
+      "closed"
+    ],
+    "lattice": "C1",
+    "name": "S11-unreachable-bad-rewrite",
+    "programs": 4,
+    "rewrites": 2
+  },
+  "local_peak_counts": {
+    "analysis/analysis": 0,
+    "analysis/rewrite": 0,
+    "rewrite/rewrite": 0
+  },
+  "modular_saturation_criterion": true,
+  "newman_equivalence_holds": true,
+  "peaks": [],
+  "reachable_state_count": 2,
+  "reachable_states": [
+    [
+      0,
+      0
+    ],
+    [
+      1,
+      0
+    ]
+  ],
+  "saturated_rewrite_peak_failures": [],
+  "saturated_rewrite_peaks_join": true,
+  "schedule_independent_source_equivalent_program": true,
+  "schema": "pvso-analysis-1",
+  "semantic_preservation": {
+    "all_programs_source_equivalent": false,
+    "all_rewrites_preserve_observation": false,
+    "program_truth_tables": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        0
+      ]
+    ],
+    "reachable_rewrite_rules": [
+      0
+    ],
+    "reachable_rewrites_preserve_observation": true,
+    "rewrites": [
+      {
+        "name": "live",
+        "preserves": true,
+        "rule": 0,
+        "source": "p0",
+        "target": "p1"
+      },
+      {
+        "name": "dead-bad",
+        "preserves": false,
+        "rule": 1,
+        "source": "dead0",
+        "target": "dead1"
+      }
+    ],
+    "source_truth_table": [
+      0,
+      1
+    ],
+    "unique_terminal_program_source_equivalent": true
+  },
+  "terminal_states": [
+    [
+      1,
+      0
+    ]
+  ],
+  "termination_measure_failures": [],
+  "termination_measure_valid": true,
+  "unique_terminal_program": true,
+  "unique_terminal_state": true,
+  "unjoinable_local_peak_count": 0
+}

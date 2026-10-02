@@ -1,0 +1,35 @@
+{
+  "name": "C03",
+  "lattice": {
+    "kind": "chain",
+    "size": 2
+  },
+  "maps": [
+    {
+      "name": "learn",
+      "table": [
+        1,
+        1
+      ]
+    }
+  ],
+  "guard": [
+    true,
+    true
+  ],
+  "emissions": [
+    [
+      "var",
+      0
+    ],
+    [
+      "var",
+      0
+    ]
+  ],
+  "inputs": 1,
+  "source": [
+    "var",
+    0
+  ]
+}

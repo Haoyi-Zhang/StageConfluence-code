@@ -1,0 +1,15 @@
+{
+  "case": "C04",
+  "kind": "wrong_semantics",
+  "runs": [
+    [
+      {
+        "op": "emit"
+      },
+      {
+        "map": 0,
+        "op": "apply"
+      }
+    ]
+  ]
+}

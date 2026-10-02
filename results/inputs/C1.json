@@ -1,0 +1,16 @@
+{
+  "lattice": {
+    "bottom": 0,
+    "kind": "explicit",
+    "name": "C1",
+    "top": 0,
+    "upper": [
+      1
+    ]
+  },
+  "maps": [
+    [
+      0
+    ]
+  ]
+}

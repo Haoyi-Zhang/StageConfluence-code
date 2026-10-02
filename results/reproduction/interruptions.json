@@ -1,0 +1,23 @@
+{
+  "schema": "pvso-reproduction-interruptions-2",
+  "observations": [
+    {
+      "stage": "combined legacy-plus-staged execution in one long-lived interpreter",
+      "outcome": "abandoned",
+      "reason": "allocator and garbage-collection interference made the staged phase substantially slower after the legacy enumeration"
+    },
+    {
+      "stage": "earlier nonempty-file completion rule",
+      "outcome": "repaired",
+      "reason": "a crash could leave a nonempty partial file that a later invocation would incorrectly skip; completion now requires parseable sentinels plus an atomic step record bound to their exact paths"
+    },
+    {
+      "stage": "final clean retained run",
+      "outcome": "completed after three external wrapper interruptions",
+      "reason": "rerunning the same command skipped only structurally valid completed steps, recomputed the remaining steps, and finished with all 22 completion records valid"
+    }
+  ],
+  "recovery_regression_tests": 5,
+  "scientific_selection_changed": false,
+  "failed_or_partial_results_used_in_claims": false
+}

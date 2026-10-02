@@ -1,0 +1,23 @@
+{
+  "name": "S11-unreachable-bad-rewrite",
+  "lattice": {"kind": "chain", "size": 1},
+  "inputs": 1,
+  "source_expression": ["var", 0],
+  "fact_labels": ["closed"],
+  "programs": [
+    {"name": "p0", "rank": 1, "expression": ["var", 0],
+     "analyses": [{"name": "id", "direction": "forward", "table": [0]}]},
+    {"name": "p1", "rank": 0, "expression": ["var", 0],
+     "analyses": [{"name": "id", "direction": "prophecy", "table": [0]}]},
+    {"name": "dead0", "rank": 1, "expression": ["var", 0],
+     "analyses": [{"name": "id", "direction": "forward", "table": [0]}]},
+    {"name": "dead1", "rank": 0, "expression": ["not", ["var", 0]],
+     "analyses": [{"name": "id", "direction": "prophecy", "table": [0]}]}
+  ],
+  "rewrites": [
+    {"name": "live", "source": "p0", "target": "p1", "guard": [true], "transfer": [0]},
+    {"name": "dead-bad", "source": "dead0", "target": "dead1", "guard": [true], "transfer": [0]}
+  ],
+  "initial_program": "p0",
+  "initial_fact": 0
+}

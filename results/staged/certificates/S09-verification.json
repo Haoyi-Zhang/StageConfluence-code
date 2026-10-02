@@ -1,0 +1,8 @@
+{
+  "edges": 10,
+  "peaks": 4,
+  "source_preserving": true,
+  "states": 7,
+  "terminals": 1,
+  "valid": true
+}

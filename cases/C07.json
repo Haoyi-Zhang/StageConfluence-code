@@ -1,0 +1,91 @@
+{
+  "name": "C07",
+  "lattice": {
+    "kind": "powerset",
+    "bits": 3
+  },
+  "maps": [
+    {
+      "name": "forward",
+      "table": [
+        2,
+        7,
+        2,
+        7,
+        6,
+        7,
+        6,
+        7
+      ]
+    },
+    {
+      "name": "backward",
+      "table": [
+        1,
+        1,
+        3,
+        3,
+        5,
+        5,
+        7,
+        7
+      ]
+    }
+  ],
+  "guard": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "emissions": [
+    [
+      "var",
+      0
+    ],
+    [
+      "var",
+      0
+    ],
+    [
+      "var",
+      0
+    ],
+    [
+      "xor",
+      [
+        "var",
+        0
+      ],
+      [
+        "const",
+        0
+      ]
+    ],
+    [
+      "var",
+      0
+    ],
+    [
+      "var",
+      0
+    ],
+    [
+      "var",
+      0
+    ],
+    [
+      "var",
+      0
+    ]
+  ],
+  "inputs": 1,
+  "source": [
+    "var",
+    0
+  ]
+}

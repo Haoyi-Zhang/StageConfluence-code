@@ -1,0 +1,56 @@
+{
+  "name": "C08",
+  "lattice": {
+    "kind": "powerset",
+    "bits": 2
+  },
+  "maps": [
+    {
+      "name": "forward",
+      "table": [
+        1,
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "name": "backward",
+      "table": [
+        2,
+        1,
+        2,
+        3
+      ]
+    }
+  ],
+  "guard": [
+    true,
+    true,
+    true,
+    true
+  ],
+  "emissions": [
+    [
+      "var",
+      0
+    ],
+    [
+      "var",
+      0
+    ],
+    [
+      "var",
+      0
+    ],
+    [
+      "var",
+      0
+    ]
+  ],
+  "inputs": 1,
+  "source": [
+    "var",
+    0
+  ]
+}

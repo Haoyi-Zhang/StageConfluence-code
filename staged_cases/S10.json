@@ -1,0 +1,78 @@
+{
+  "name": "S10-program-confluent-state-nonconfluent",
+  "lattice": {
+    "kind": "chain",
+    "size": 2
+  },
+  "fact_labels": [
+    "none",
+    "H"
+  ],
+  "inputs": 1,
+  "source_expression": [
+    "var",
+    0
+  ],
+  "initial_program": "p0",
+  "initial_fact": 0,
+  "programs": [
+    {
+      "name": "p0",
+      "rank": 1,
+      "expression": [
+        "or",
+        [
+          "var",
+          0
+        ],
+        [
+          "const",
+          0
+        ]
+      ],
+      "analyses": [
+        {
+          "name": "discover-history",
+          "direction": "forward",
+          "table": [
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "name": "p1",
+      "rank": 0,
+      "expression": [
+        "var",
+        0
+      ],
+      "analyses": [
+        {
+          "name": "fixed",
+          "direction": "prophecy",
+          "table": [
+            0,
+            1
+          ]
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "name": "erase-zero",
+      "source": "p0",
+      "target": "p1",
+      "guard": [
+        true,
+        true
+      ],
+      "transfer": [
+        0,
+        1
+      ]
+    }
+  ]
+}

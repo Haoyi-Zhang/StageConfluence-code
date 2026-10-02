@@ -1,0 +1,143 @@
+{
+  "child_address_space_limit_bytes": 3221225472,
+  "child_cpu_limit_seconds": 180,
+  "child_system_cpu_seconds_this_invocation": 0.54292,
+  "child_user_cpu_seconds_this_invocation": 26.929826,
+  "completed": true,
+  "legacy_chunks": 10,
+  "maximum_child_peak_rss_kib_this_invocation": 95660,
+  "maximum_concurrent_children": 1,
+  "note": "Sequential process isolation prevents cross-campaign allocator/GC interference. A step is skipped only when its parseable sentinels and atomically written completion record agree; a partial nonempty file is never a completion signal. Timings are informative; deterministic scientific files are compared separately.",
+  "parent_cpu_seconds_this_invocation": 0.02471759600000012,
+  "resumable": true,
+  "scientific_component_cpu_seconds": 79.37147813,
+  "staged_families": 7,
+  "steps": [
+    {
+      "label": "legacy-evidence-and-tests",
+      "returncode": 0,
+      "skipped_completed": true
+    },
+    {
+      "label": "legacy-enumeration-C1-0-1",
+      "returncode": 0,
+      "skipped_completed": true
+    },
+    {
+      "label": "legacy-enumeration-C2-0-2",
+      "returncode": 0,
+      "skipped_completed": true
+    },
+    {
+      "label": "legacy-enumeration-C3-0-5",
+      "returncode": 0,
+      "skipped_completed": true
+    },
+    {
+      "label": "legacy-enumeration-C4-0-14",
+      "returncode": 0,
+      "skipped_completed": true
+    },
+    {
+      "label": "legacy-enumeration-B2-0-9",
+      "returncode": 0,
+      "skipped_completed": true
+    },
+    {
+      "label": "legacy-enumeration-C5-0-14",
+      "returncode": 0,
+      "skipped_completed": true
+    },
+    {
+      "label": "legacy-enumeration-C5-14-28",
+      "returncode": 0,
+      "skipped_completed": true
+    },
+    {
+      "label": "legacy-enumeration-C5-28-42",
+      "returncode": 0,
+      "skipped_completed": true
+    },
+    {
+      "label": "legacy-enumeration-M3-0-15",
+      "returncode": 0,
+      "skipped_completed": true
+    },
+    {
+      "label": "legacy-enumeration-N5-0-21",
+      "returncode": 0,
+      "skipped_completed": true
+    },
+    {
+      "label": "legacy-summarize",
+      "returncode": 0,
+      "skipped_completed": true
+    },
+    {
+      "label": "staged-enumeration",
+      "returncode": 0,
+      "skipped_completed": true
+    },
+    {
+      "label": "staged-independent-audit-A-C2-one-rewrite",
+      "returncode": 0,
+      "skipped_completed": true
+    },
+    {
+      "label": "staged-independent-audit-A-C3-one-rewrite",
+      "returncode": 0,
+      "skipped_completed": true
+    },
+    {
+      "label": "staged-independent-audit-A-B2-one-rewrite",
+      "returncode": 0,
+      "skipped_completed": true
+    },
+    {
+      "label": "staged-independent-audit-B-C2-fork",
+      "returncode": 0,
+      "skipped_completed": true
+    },
+    {
+      "label": "staged-independent-audit-B-B2-fork",
+      "returncode": 0,
+      "skipped_completed": true
+    },
+    {
+      "child_system_cpu_seconds": 0.101314,
+      "child_user_cpu_seconds": 22.394004,
+      "label": "staged-independent-audit-C-B2-diamond",
+      "returncode": 0,
+      "skipped_completed": false,
+      "wall_seconds": 22.079329840000128
+    },
+    {
+      "child_system_cpu_seconds": 0.20082199999999994,
+      "child_user_cpu_seconds": 2.251895000000001,
+      "label": "staged-independent-audit-D-B2-two-analysis",
+      "returncode": 0,
+      "skipped_completed": false,
+      "wall_seconds": 2.055679664000081
+    },
+    {
+      "child_system_cpu_seconds": 0.11588100000000001,
+      "child_user_cpu_seconds": 1.115751999999997,
+      "label": "staged-independent-audit-aggregate",
+      "returncode": 0,
+      "skipped_completed": false,
+      "wall_seconds": 0.8008022159999655
+    },
+    {
+      "child_system_cpu_seconds": 0.12490299999999999,
+      "child_user_cpu_seconds": 1.1681750000000015,
+      "label": "staged-case-evidence",
+      "returncode": 0,
+      "skipped_completed": false,
+      "wall_seconds": 0.8304175139999188
+    }
+  ],
+  "steps_in_plan": 22,
+  "steps_skipped_from_prior_completed_output": 18,
+  "wall_seconds_this_invocation": 25.78023475499981,
+  "workers": 1
+}

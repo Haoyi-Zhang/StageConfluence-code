@@ -1,0 +1,118 @@
+{
+  "claims": {
+    "all_rewrites_preserve_observation": false,
+    "globally_confluent": true,
+    "locally_confluent": true,
+    "terminating": true,
+    "unique_terminal_state": true
+  },
+  "closures": [
+    {
+      "fact": 0,
+      "final": 0,
+      "program": 0,
+      "trace": []
+    },
+    {
+      "fact": 0,
+      "final": 0,
+      "program": 1,
+      "trace": []
+    },
+    {
+      "fact": 0,
+      "final": 0,
+      "program": 2,
+      "trace": []
+    },
+    {
+      "fact": 0,
+      "final": 0,
+      "program": 3,
+      "trace": []
+    }
+  ],
+  "edges": [
+    {
+      "direction": null,
+      "id": 0,
+      "kind": "rewrite",
+      "name": "live",
+      "rule": 0,
+      "source": 0,
+      "target": 1
+    }
+  ],
+  "initial_state": 0,
+  "instance": "S11-unreachable-bad-rewrite",
+  "peaks": [],
+  "remaining_heights": [
+    0
+  ],
+  "schema": "pvso-confluence-certificate-1",
+  "semantics": {
+    "all_programs_source_equivalent": false,
+    "all_rewrites_preserve_observation": false,
+    "program_truth_tables": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        0
+      ]
+    ],
+    "rewrites": [
+      {
+        "name": "live",
+        "preserves": true,
+        "rule": 0,
+        "source": "p0",
+        "target": "p1"
+      },
+      {
+        "name": "dead-bad",
+        "preserves": false,
+        "rule": 1,
+        "source": "dead0",
+        "target": "dead1"
+      }
+    ],
+    "source_truth_table": [
+      0,
+      1
+    ]
+  },
+  "states": [
+    {
+      "fact": 0,
+      "id": 0,
+      "measure": 1,
+      "outgoing": [
+        0
+      ],
+      "parent_edge": null,
+      "program": 0
+    },
+    {
+      "fact": 0,
+      "id": 1,
+      "measure": 0,
+      "outgoing": [],
+      "parent_edge": 0,
+      "program": 1
+    }
+  ],
+  "terminals": [
+    1
+  ]
+}

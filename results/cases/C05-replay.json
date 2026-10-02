@@ -1,0 +1,10 @@
+{
+  "kind": "incomplete",
+  "terminal_states": [
+    {
+      "artifact": null,
+      "fact": 1
+    }
+  ],
+  "valid": true
+}

@@ -1,0 +1,29 @@
+{
+  "name": "C09",
+  "lattice": {
+    "kind": "chain",
+    "size": 1
+  },
+  "maps": [
+    {
+      "name": "identity",
+      "table": [
+        0
+      ]
+    }
+  ],
+  "guard": [
+    true
+  ],
+  "emissions": [
+    [
+      "var",
+      0
+    ]
+  ],
+  "inputs": 1,
+  "source": [
+    "var",
+    0
+  ]
+}

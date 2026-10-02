@@ -1,0 +1,12 @@
+{
+  "different_programs": true,
+  "left_terminal": [
+    0,
+    1
+  ],
+  "right_terminal": [
+    1,
+    1
+  ],
+  "valid": true
+}

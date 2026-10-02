@@ -1,0 +1,74 @@
+{
+  "name": "I02-nondecreasing-rank",
+  "lattice": {
+    "kind": "chain",
+    "size": 2
+  },
+  "fact_labels": [
+    "none",
+    "H"
+  ],
+  "inputs": 1,
+  "source_expression": [
+    "var",
+    0
+  ],
+  "initial_program": "p0",
+  "initial_fact": 0,
+  "programs": [
+    {
+      "name": "p0",
+      "rank": 0,
+      "expression": [
+        "var",
+        0
+      ],
+      "analyses": [
+        {
+          "name": "fixed",
+          "direction": "forward",
+          "table": [
+            0,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "name": "p1",
+      "rank": 0,
+      "expression": [
+        "not",
+        [
+          "var",
+          0
+        ]
+      ],
+      "analyses": [
+        {
+          "name": "fixed",
+          "direction": "prophecy",
+          "table": [
+            0,
+            1
+          ]
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "name": "negate",
+      "source": "p0",
+      "target": "p1",
+      "guard": [
+        true,
+        true
+      ],
+      "transfer": [
+        0,
+        1
+      ]
+    }
+  ]
+}

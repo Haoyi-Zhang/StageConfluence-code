@@ -1,0 +1,44 @@
+{
+  "name": "C10",
+  "lattice": {
+    "kind": "chain",
+    "size": 3
+  },
+  "maps": [
+    {
+      "name": "jump",
+      "table": [
+        2,
+        2,
+        2
+      ]
+    }
+  ],
+  "guard": [
+    true,
+    true,
+    true
+  ],
+  "emissions": [
+    [
+      "var",
+      0
+    ],
+    [
+      "not",
+      [
+        "var",
+        0
+      ]
+    ],
+    [
+      "var",
+      0
+    ]
+  ],
+  "inputs": 1,
+  "source": [
+    "var",
+    0
+  ]
+}
