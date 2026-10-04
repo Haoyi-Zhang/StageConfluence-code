@@ -44,6 +44,3 @@ A preliminary design ran the legacy and staged campaigns in one long-lived inter
 
 Closest work was read for definitions and guarantee boundaries before the theorem was locked. Metadata, venue, pages and persistent identifiers were cross-checked against publisher, DOI, arXiv, DBLP, library or author records where available. The calibration inventory includes 13 TOPLAS articles, influential rewriting/data-flow foundations and adjacent staging, compiler-validation and prophecy/history work. `literature/inspection.md` records technical roles, `literature/reference-audit.csv` records citation-level metadata, and `literature/identifier-audit.csv` records one verification source and field-level agreement for all 49 cited entries.
 
-## Generative-AI involvement
-
-Generative AI was used substantially in research-question refinement, literature triage, proof development, code and test construction, experiment execution and interpretation, manuscript drafting, artifact organization and self-audit. It was not merely a grammar tool. No external person was contacted and no private data, external compute service, external model API, GPU or autonomous submission workflow was used. Human authors must independently verify and accept responsibility before external use.
