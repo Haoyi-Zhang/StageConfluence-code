@@ -19,14 +19,16 @@ Retained deterministic outputs under `results/` report:
 - 207,069 exactly confluent systems, with zero disagreement between unique-normal-form and local-peak checks;
 - 134,977 systems satisfying guard persistence, closure commutation and saturated local confluence;
 - zero modular false positives and 72,092 modular false negatives;
-- 235,741 systems with a unique terminal program, including 28,672 program-only cases;
+- 235,741 systems with a unique terminal catalog program ID, including 28,672 ID-only/non-state-confluent cases;
 - five replayed positive certificates, four replayed negative witnesses and 72/72 rejected single-field mutations;
 - zero disagreement in 4,065,624 field comparisons by a separately implemented classifier;
 - 74 passing unit tests;
 - 2,560,900 one-slot control instances with zero exact-formula mismatch; and
 - 3,136 ordered Boolean-expression pairs, including 476 different-syntax/equal-semantics pairs.
 
-These counts are exhaustive only for the explicitly declared finite catalogs. They are not evidence about all finite lattices or production compiler workloads.
+These counts are exhaustive only for the explicitly declared finite catalogs. They are not evidence about all finite lattices or production compiler workloads. The seven-family generator holds every expression at `var(0)`, so program-ID counts do not measure syntax divergence. The `unique_program` and `unique_terminal_program` fields compare catalog identifiers, not expression trees.
+
+Within each full-campaign classifier, the direct and local-peak predicates reuse one normal-form table; the latter intersects successor normal-form sets. Named-case analysis and certificates use explicit descendant/join paths. The separate nine-field audit checks another implementation, but is not a comparison of independent descendant searches with terminal propagation.
 
 ## Fast checks
 
@@ -77,7 +79,7 @@ Resource records are excluded from equality because host timing and peak RSS are
 - `staged_cases/`: nine retained staged inputs plus rejected invalid inputs.
 - `src/model.py`, `src/checker.py`, `check.py`, `exhaustive.py`, `collect.py`: one-slot negative control.
 - `tests/`: 74 unit, boundary, replay, recovery and mutation tests.
-- `proofs/`: detailed handwritten mathematical arguments.
+- `proofs/`: supplied detailed mathematical arguments.
 - `results/`: retained deterministic outputs and separately labeled resource records.
 - `claim_evidence_ledger.csv`: material claims linked to proofs, code and raw evidence.
 - `external_resources.csv`: scholarly/template resources and integration boundaries.
@@ -91,6 +93,6 @@ The mutation campaign is finite and selected. Rejecting all mutants is evidence 
 
 ## Scope and non-claims
 
-The artifact does not implement BuildIt or Nexis, does not claim correspondence to an unrestricted source language, and does not report optimization speedups. General theorems are handwritten rather than proof-assistant checked. No external solver, model API, private data, live service or GPU is used.
+The artifact does not implement BuildIt or Nexis, does not claim correspondence to an unrestricted source language, and does not report optimization speedups. Supplied general theorems are not proof-assistant checked. No external solver, model API, private data, live service or GPU is used.
 
 Original code and generated examples are covered by `LICENSE`. Scholarly papers and the ACM template remain under their own terms and are cited or accompanied by their supplied notice; no paper PDFs or font files are redistributed.
