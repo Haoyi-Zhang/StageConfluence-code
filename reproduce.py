@@ -15,13 +15,17 @@ import csv
 import json
 import os
 from pathlib import Path
-import resource
 import shutil
 import subprocess
 import sys
 import tempfile
 import time
 from typing import Sequence
+
+try:
+    import resource
+except ModuleNotFoundError:
+    resource = None  # Portable completion helpers do not require POSIX limits.
 
 ROOT = Path(__file__).resolve().parent
 CHUNKS = (
@@ -64,6 +68,8 @@ def write_json(path: Path, value: object) -> None:
 
 def child_limits() -> None:
     """Apply the documented Linux limits before exec in each child."""
+    if resource is None:
+        raise RuntimeError("POSIX resource limits are unavailable")
     # Each program is single-threaded.  Do not pin the orchestrated child: the
     # kernel may migrate it away from a contended logical CPU.  The legacy
     # chunk executable applies its own one-CPU affinity.
@@ -155,21 +161,22 @@ def run(
         return
     marker.unlink(missing_ok=True)
     started_wall = time.perf_counter()
-    before = resource.getrusage(resource.RUSAGE_CHILDREN)
+    before = resource.getrusage(resource.RUSAGE_CHILDREN) if resource is not None else None
     env = os.environ.copy()
     env.update({"PYTHONHASHSEED": "0", "PYTHONDONTWRITEBYTECODE": "1"})
     completed = subprocess.run(
         list(argv), cwd=ROOT, env=env, check=False,
-        preexec_fn=child_limits if os.name == "posix" else None,
+        preexec_fn=child_limits if os.name == "posix" and resource is not None else None,
+        timeout=240,
     )
-    after = resource.getrusage(resource.RUSAGE_CHILDREN)
+    after = resource.getrusage(resource.RUSAGE_CHILDREN) if resource is not None else None
     record = {
         "label": label,
         "skipped_completed": False,
         "returncode": completed.returncode,
         "wall_seconds": time.perf_counter() - started_wall,
-        "child_user_cpu_seconds": after.ru_utime - before.ru_utime,
-        "child_system_cpu_seconds": after.ru_stime - before.ru_stime,
+        "child_user_cpu_seconds": after.ru_utime - before.ru_utime if before is not None else None,
+        "child_system_cpu_seconds": after.ru_stime - before.ru_stime if before is not None else None,
     }
     records.append(record)
     if completed.returncode != 0:
@@ -208,6 +215,8 @@ def main() -> None:
         help="ignore prior step-completion records and rerun every component",
     )
     args = parser.parse_args()
+    if os.name != "posix" or resource is None:
+        raise RuntimeError("full reproduction requires POSIX resource limits; portable checks remain available")
     output = args.output.resolve()
     output.mkdir(parents=True, exist_ok=True)
     marker_directory = output / MARKER_DIRECTORY

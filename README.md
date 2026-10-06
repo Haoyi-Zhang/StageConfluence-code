@@ -22,7 +22,7 @@ Retained deterministic outputs under `results/` report:
 - 235,741 systems with a unique terminal catalog program ID, including 28,672 ID-only/non-state-confluent cases;
 - five replayed positive certificates, four replayed negative witnesses and 72/72 rejected single-field mutations;
 - zero disagreement in 4,065,624 field comparisons by a separately implemented classifier;
-- 74 passing unit tests;
+- 81 passing unit tests (74 original tests plus seven scientific-contract regressions);
 - 2,560,900 one-slot control instances with zero exact-formula mismatch; and
 - 3,136 ordered Boolean-expression pairs, including 476 different-syntax/equal-semantics pairs.
 
@@ -66,6 +66,10 @@ Expected comparison:
 
 Resource records are excluded from equality because host timing and peak RSS are observations, not deterministic evidence.
 
+The retained reproduction comparison predates the seven added regressions; the 94-file expectation is a check to run on the current tree, not a fresh remote result. The current suite passed locally on Windows with Python 3.12.14. Full POSIX driver reproduction is separate.
+
+The full driver requires POSIX resource limits and gives each child an additional 240-second wall timeout. The standalone repository's `scientific-checks.yml` runs the full finite plan and comparison under a whole-run bound, retaining raw output even on failure. Workflow preparation is not evidence of a remote run.
+
 ## Repository map
 
 - `src/staged_model.py`: validated finite staged-system representation and parser.
@@ -78,7 +82,7 @@ Resource records are excluded from equality because host timing and peak RSS are
 - `staged_evidence.py`: named evidence and mutation campaign.
 - `staged_cases/`: nine retained staged inputs plus rejected invalid inputs.
 - `src/model.py`, `src/checker.py`, `check.py`, `exhaustive.py`, `collect.py`: one-slot negative control.
-- `tests/`: 74 unit, boundary, replay, recovery and mutation tests.
+- `tests/`: 81 unit, boundary, replay, recovery and mutation tests.
 - `proofs/`: supplied detailed mathematical arguments.
 - `results/`: retained deterministic outputs and separately labeled resource records.
 - `claim_evidence_ledger.csv`: material claims linked to proofs, code and raw evidence.

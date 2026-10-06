@@ -6,7 +6,6 @@ import argparse
 import copy
 import csv
 import json
-import resource
 import time
 from pathlib import Path
 from typing import Any, Callable
@@ -163,6 +162,8 @@ def generate_evidence(cases: Path, out: Path) -> dict[str, Any]:
 
 
 def main() -> int:
+    import resource
+
     parser = argparse.ArgumentParser()
     parser.add_argument("--cases", type=Path, default=Path("staged_cases"))
     parser.add_argument("--out", type=Path, required=True)

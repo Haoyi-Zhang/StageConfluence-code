@@ -349,6 +349,13 @@ function \(\llbracket p\rrbracket:D\to O\).  The executable model uses Boolean
 expressions and exhaustively enumerates \(D=\{0,1\}^k\).  Analysis transitions
 do not change the program component.
 
+Executable instances additionally carry a reference source expression S. In
+the retained inputs it is observationally equivalent to the initial catalog
+expression, but need not be syntactically identical. Source-equivalence
+reports compare with S even when these expressions differ. The pathwise theorem
+preserves the initial catalog program; relating that program to a separate S is
+an additional premise, not a consequence of rulewise preservation.
+
 A rewrite \(r:p\to q\) is **observationally preserving** when
 \(\llbracket p\rrbracket=\llbracket q\rrbracket\).  This condition is fact
 independent in the current model; a richer language could index semantics by a
@@ -365,9 +372,10 @@ unchanged.  Rewrite steps preserve its denotation by hypothesis.  ∎
 
 ### Corollary 7.2 (unique source-equivalent residual program)
 
-If all reachable rewrites preserve observation and the root has a
-schedule-independent residual program, then that unique residual program is
-observationally equivalent to the source program.  In particular, the
+If the initial catalog program is observationally equivalent to S, all
+reachable rewrites preserve observation, and the root has a schedule-independent
+residual program, then that unique residual program is observationally
+equivalent to S. In particular, the
 conclusion holds under Theorem 5.5 plus reachable rulewise preservation.
 
 **Proof.**  Every maximal execution reaches the unique program, and Theorem 7.1

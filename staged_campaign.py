@@ -273,6 +273,11 @@ def run_campaign(out: Path, selected: set[str] | None = None, limit: int | None 
             writer.writeheader()
             writer.writerows(rows)
     (out / "staged-enumeration-examples.json").write_text(json.dumps(examples, indent=2, sort_keys=True) + "\n")
+    # Retain raw counterexample rows, but fail if a theorem-instance gate fails.
+    if totals["newman_mismatches"] or totals["modular_false_positives"]:
+        raise RuntimeError(
+            "staged campaign found exact/local disagreement or a modular false positive"
+        )
     return summary
 
 

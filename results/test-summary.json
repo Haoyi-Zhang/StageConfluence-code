@@ -46,6 +46,13 @@
     "test_nonempty_file_without_completion_record_is_not_complete (test_reproduce.ReproductionCompletion.test_nonempty_file_without_completion_record_is_not_complete)",
     "test_run_marks_success_and_then_skips (test_reproduce.ReproductionCompletion.test_run_marks_success_and_then_skips)",
     "test_structural_sentinel_validation (test_reproduce.ReproductionCompletion.test_structural_sentinel_validation)",
+    "test_certificate_metadata_and_record_order_are_required (test_scientific_boundaries.ScientificBoundaries.test_certificate_metadata_and_record_order_are_required)",
+    "test_full_driver_requires_posix_limits_before_creating_outputs (test_scientific_boundaries.ScientificBoundaries.test_full_driver_requires_posix_limits_before_creating_outputs)",
+    "test_global_program_audit_is_not_a_terminal_audit (test_scientific_boundaries.ScientificBoundaries.test_global_program_audit_is_not_a_terminal_audit)",
+    "test_noncommuting_analyses_share_closure_in_both_orders (test_scientific_boundaries.ScientificBoundaries.test_noncommuting_analyses_share_closure_in_both_orders)",
+    "test_primary_campaign_fails_but_keeps_raw_theorem_disagreement (test_scientific_boundaries.ScientificBoundaries.test_primary_campaign_fails_but_keeps_raw_theorem_disagreement)",
+    "test_rule_preservation_does_not_relate_a_different_reference_source (test_scientific_boundaries.ScientificBoundaries.test_rule_preservation_does_not_relate_a_different_reference_source)",
+    "test_temporarily_enabled_emission_can_be_postponed (test_scientific_boundaries.ScientificBoundaries.test_temporarily_enabled_emission_can_be_postponed)",
     "test_confluent_instance_has_no_terminal_fork_witness (test_staged.StagedCertificates.test_confluent_instance_has_no_terminal_fork_witness)",
     "test_mutate_claim (test_staged.StagedCertificates.test_mutate_claim)",
     "test_mutate_closure_trace (test_staged.StagedCertificates.test_mutate_closure_trace)",
@@ -79,5 +86,5 @@
     "test_state_confluence_stronger_than_program_confluence (test_staged.StagedStatements.test_state_confluence_stronger_than_program_confluence)",
     "test_unjoined_rewrite_peak (test_staged.StagedStatements.test_unjoined_rewrite_peak)"
   ],
-  "tests_run": 74
+  "tests_run": 81
 }

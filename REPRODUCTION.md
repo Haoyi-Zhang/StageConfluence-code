@@ -9,7 +9,7 @@ Required:
 - no third-party Python packages;
 - enough writable space for about 10 MiB of outputs.
 
-The full driver is single-worker and starts at most one child process at a time. On non-POSIX systems, the scientific code can still run, but the documented child limits are not applied.
+The full driver is single-worker and starts at most one child process at a time. It refuses to start without POSIX resource limits. Individual model, classifier, evidence-generation helpers and unit tests remain importable on other standard-library Python platforms; that does not make the full POSIX driver portable.
 
 ## Tests
 
@@ -17,7 +17,7 @@ The full driver is single-worker and starts at most one child process at a time.
 python -m unittest discover -s tests -v
 ```
 
-Expected: 74 tests, zero failures and zero errors.
+Expected: 81 tests, zero failures and zero errors.
 
 ## Named staged evidence
 
@@ -35,7 +35,7 @@ python staged_check.py verify-witness staged_cases/S02.json /tmp/S02-witness.jso
 ## Complete deterministic reproduction
 
 ```sh
-rm -rf /tmp/prophecy-results
+# Choose a new directory; do not delete an existing result tree.
 sh reproduce.sh /tmp/prophecy-results
 python compare_results.py results /tmp/prophecy-results
 ```
@@ -69,7 +69,7 @@ unique terminal program       235741
 program-only                   28672
 mutations rejected             72 / 72
 separate field comparisons   4065624 / 4065624
-unit tests                     74 / 74
+unit tests                     81 / 81
 legacy one-slot instances     2560900
 legacy formula mismatches      0
 Boolean expression pairs       3136
@@ -83,7 +83,11 @@ sh reproduce.sh /tmp/prophecy-run-b
 python compare_results.py /tmp/prophecy-run-a /tmp/prophecy-run-b
 ```
 
-The retained `results/reproduction/comparison.json` records equality of two independently populated directories from the final implementation.
+The retained `results/reproduction/comparison.json` records the historical equality of two independently populated directories before the seven additional regressions. It is not a fresh run of the current suite. The current test-name summary is updated separately; a new complete POSIX driver run is needed to re-establish full 94-file equality for the current tree.
+
+## Automated finite checks
+
+`.github/workflows/scientific-checks.yml` is for the flat standalone artifact repository. On pushes to `main` or manual dispatch it runs the full finite driver and deterministic comparison on Ubuntu 24.04. The scientific command group has a 600-second wall bound, a 3 GiB address-space bound and an outer CPU limit; each driver child additionally has its existing CPU/address-space caps and a 240-second wall timeout. Failures propagate and raw outputs are uploaded even on failure. Preparing this workflow is not evidence that it has run remotely.
 
 ## Interpreting failures
 

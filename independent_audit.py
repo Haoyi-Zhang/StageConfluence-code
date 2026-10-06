@@ -14,7 +14,6 @@ import csv
 from itertools import combinations
 import json
 from pathlib import Path
-import resource
 import time
 from typing import Iterable
 
@@ -293,6 +292,9 @@ def run(
     start: int = 0,
     stop: int | None = None,
 ) -> dict[str, object]:
+    # POSIX accounting is needed only by this command, not the pure classifier.
+    import resource
+
     out.mkdir(parents=True, exist_ok=True)
     selected = selected or set()
     if (start or stop is not None) and len(selected) != 1:

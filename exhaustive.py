@@ -10,7 +10,6 @@ import csv
 import json
 import os
 from pathlib import Path
-import resource
 import time
 from src.model import named_lattice, monotone_inflationary_maps
 from src.checker import (fact_reachability, least_common_fixed_point,
@@ -72,6 +71,8 @@ def check_pair(lat, maps, first, second):
 
 
 def resource_limits():
+    import resource
+
     # One process, one logical CPU. No children and no network operations.
     if hasattr(os, "sched_getaffinity"):
         os.sched_setaffinity(0, {min(os.sched_getaffinity(0))})
@@ -81,6 +82,8 @@ def resource_limits():
 
 def run_chunk(name, start, stop, out):
     resource_limits()
+    import resource
+
     wall, cpu = time.perf_counter(), time.process_time()
     lat = named_lattice(name)
     lat.validate()

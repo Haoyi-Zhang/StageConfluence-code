@@ -6,7 +6,6 @@ import csv
 import io
 import json
 from pathlib import Path
-import resource
 import time
 import unittest
 from collections import defaultdict
@@ -122,6 +121,8 @@ def summarize(out):
     print(json.dumps(total,indent=2))
 
 if __name__=='__main__':
+    import resource
+
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('action',choices=['evidence','summarize'])
     p.add_argument('--out',type=Path,required=True)
