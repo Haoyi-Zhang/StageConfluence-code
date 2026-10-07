@@ -32,6 +32,8 @@ jobs:
           timeout --signal=TERM --kill-after=15s 600s bash -c '
             set -euo pipefail
             python -B .github/scripts/check_repository.py
+            python -B tests/state_admission_regression.py
+            python -B -O tests/state_admission_regression.py
             python -B reproduce.py "$SCIENTIFIC_OUTPUT/results"
             python -B compare_results.py results "$SCIENTIFIC_OUTPUT/results"
           ' 2>&1 | tee "$SCIENTIFIC_OUTPUT/run.log"

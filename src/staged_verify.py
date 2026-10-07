@@ -126,6 +126,7 @@ def verify_confluence_certificate(instance: StagedInstance, cert: Any) -> dict[s
     _require(len(states_raw) <= len(instance.programs) * instance.lattice.n, "too many states")
 
     states: list[State] = []
+    seen_states: set[State] = set()
     outgoing_ids: list[list[int]] = []
     parent_edges: list[int | None] = []
     for sid, row in enumerate(states_raw):
@@ -134,7 +135,8 @@ def verify_confluence_certificate(instance: StagedInstance, cert: Any) -> dict[s
         _require(type(p) is int and 0 <= p < len(instance.programs), "invalid state program")
         _require(type(f) is int and 0 <= f < instance.lattice.n, "invalid state fact")
         state = (p, f)
-        _require(state not in states, "duplicate state")
+        _require(state not in seen_states, "duplicate state")
+        seen_states.add(state)
         states.append(state)
         _require(row.get("measure") == _measure(instance, state, rem), "state measure mismatch")
         out = row.get("outgoing")

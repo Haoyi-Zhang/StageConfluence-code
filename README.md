@@ -43,6 +43,15 @@ python staged_check.py witness staged_cases/S02.json --out /tmp/S02-witness.json
 python staged_check.py verify-witness staged_cases/S02.json /tmp/S02-witness.json
 ```
 
+The separate portable admission regression is run with
+`python -B tests/state_admission_regression.py` from this directory (or by its
+absolute path from any working directory). It uses a test-local literal finite
+reference, checks positive and negative evidence, malformed coordinates and
+duplicate/error precedence, and probes the 2,048-state admission cap. Admission
+probes deliberately stop at an invalid root ID; they are not full certificates.
+This standalone check is additional to the retained 81-test inventory and does
+not rerun or alter any saved campaign results. It contains no timing work.
+
 ## Complete reproduction
 
 Use a new output directory:
