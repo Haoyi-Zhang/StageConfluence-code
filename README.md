@@ -43,6 +43,17 @@ python staged_check.py witness staged_cases/S02.json --out /tmp/S02-witness.json
 python staged_check.py verify-witness staged_cases/S02.json /tmp/S02-witness.json
 ```
 
+Positive certificate replay reports two distinct semantic properties:
+
+- `all_declared_rewrites_preserve_observation` checks every declared rewrite,
+  including unreachable rules.
+- `terminal_programs_source_equivalent` compares each verified terminal
+  program's truth table with the reference source table.
+
+Thus S11 has a nonpreserving unreachable rule but a source-equivalent terminal;
+S07 has a terminal that is not source-equivalent. Confluence alone does not
+establish either semantic property.
+
 The separate portable admission regression is run with
 `python -B tests/state_admission_regression.py` from this directory (or by its
 absolute path from any working directory). It uses a test-local literal finite

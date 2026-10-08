@@ -51,16 +51,24 @@ class ScientificBoundaries(unittest.TestCase):
         raw["source_expression"] = ["not", ["var", 0]]
         raw["rewrites"] = []
         raw["programs"] = [raw["programs"][0]]
-        report = analyze_staged(load_staged_instance(raw))
+        instance = load_staged_instance(raw)
+        report = analyze_staged(instance)
         self.assertTrue(report["semantic_preservation"]["reachable_rewrites_preserve_observation"])
         self.assertTrue(report["global_confluence"])
         self.assertFalse(report["schedule_independent_source_equivalent_program"])
+        verified=verify_confluence_certificate(instance,make_confluence_certificate(instance))
+        self.assertTrue(verified["all_declared_rewrites_preserve_observation"])
+        self.assertFalse(verified["terminal_programs_source_equivalent"])
 
     def test_global_program_audit_is_not_a_terminal_audit(self):
         raw = json.loads((ROOT / "staged_cases/S11.json").read_text(encoding="utf-8"))
-        report = analyze_staged(load_staged_instance(raw))
+        instance = load_staged_instance(raw)
+        report = analyze_staged(instance)
         self.assertFalse(report["semantic_preservation"]["all_programs_source_equivalent"])
         self.assertTrue(report["semantic_preservation"]["unique_terminal_program_source_equivalent"])
+        verified=verify_confluence_certificate(instance,make_confluence_certificate(instance))
+        self.assertFalse(verified["all_declared_rewrites_preserve_observation"])
+        self.assertTrue(verified["terminal_programs_source_equivalent"])
 
     def test_certificate_metadata_and_record_order_are_required(self):
         raw = json.loads((ROOT / "staged_cases/S01.json").read_text(encoding="utf-8"))

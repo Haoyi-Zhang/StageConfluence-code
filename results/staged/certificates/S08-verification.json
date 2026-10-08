@@ -1,7 +1,8 @@
 {
   "edges": 4,
   "peaks": 1,
-  "source_preserving": true,
+  "all_declared_rewrites_preserve_observation": true,
+  "terminal_programs_source_equivalent": true,
   "states": 4,
   "terminals": 1,
   "valid": true

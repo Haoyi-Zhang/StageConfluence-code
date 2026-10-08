@@ -259,7 +259,11 @@ def verify_confluence_certificate(instance: StagedInstance, cert: Any) -> dict[s
         "edges": len(edge_sigs),
         "peaks": len(peaks_raw),
         "terminals": len(terminals),
-        "source_preserving": semantics["all_rewrites_preserve_observation"],
+        "all_declared_rewrites_preserve_observation": semantics["all_rewrites_preserve_observation"],
+        "terminal_programs_source_equivalent": all(
+            semantics["program_truth_tables"][states[sid][0]] == semantics["source_truth_table"]
+            for sid in terminals
+        ),
     }
 
 

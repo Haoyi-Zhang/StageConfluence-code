@@ -250,7 +250,10 @@ class AdmissionRegression(unittest.TestCase):
                     self.assertEqual(result, {"valid": True, "states": len(literal["reachable"]),
                                               "edges": literal["edges"], "peaks": literal["peaks"],
                                               "terminals": len(literal["terminal"]),
-                                              "source_preserving": literal["semantics"]["all_rewrites_preserve_observation"]})
+                                              "all_declared_rewrites_preserve_observation": literal["semantics"]["all_rewrites_preserve_observation"],
+                                              "terminal_programs_source_equivalent": all(
+                                                  literal["semantics"]["program_truth_tables"][p] == literal["semantics"]["source_truth_table"]
+                                                  for p, _ in literal["terminal"])})
                     self.assertEqual(cert["semantics"], literal["semantics"])
                     self.assertEqual(cert["remaining_heights"], coheights(raw))
                     pairs = [(r["program"], r["fact"]) for r in cert["states"]]
