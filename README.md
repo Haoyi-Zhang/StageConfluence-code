@@ -119,4 +119,4 @@ The mutation campaign is finite and selected. Rejecting all mutants is evidence 
 
 The artifact does not implement BuildIt or Nexis, does not claim correspondence to an unrestricted source language, and does not report optimization speedups. Supplied general theorems are not proof-assistant checked. No external solver, model API, private data, live service or GPU is used.
 
-Original code and generated examples are covered by `LICENSE`. Scholarly papers and the ACM template remain under their own terms and are cited or accompanied by their supplied notice; no paper PDFs or font files are redistributed.
+Original code and generated examples are covered by `LICENSE`. Scholarly papers and the ACM template remain under their own terms and are cited or accompanied by their supplied notice; no scholarly paper PDFs are redistributed. The optional figure reproducer includes the unmodified Linux Libertine regular TrueType face under its separate SIL Open Font License in `fonts/OFL-1.1.txt`.

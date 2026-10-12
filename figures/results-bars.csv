@@ -1,0 +1,6 @@
+metric,label,count,instances
+direct_confluent,state-confluent,207069,451736
+modular_true,modular criterion,134977,451736
+unique_terminal_program,unique program ID,235741,451736
+guard_persistent,guard persistent,305036,451736
+saturated_peaks_join,saturated peaks join,349208,451736
