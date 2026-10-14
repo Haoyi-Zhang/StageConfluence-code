@@ -1,0 +1,32 @@
+{
+  "instance": "S10-program-confluent-state-nonconfluent",
+  "left": [
+    {
+      "kind": "rewrite",
+      "name": "erase-zero",
+      "rule": 0
+    }
+  ],
+  "left_terminal": [
+    1,
+    0
+  ],
+  "right": [
+    {
+      "direction": "forward",
+      "kind": "analysis",
+      "name": "discover-history",
+      "rule": 0
+    },
+    {
+      "kind": "rewrite",
+      "name": "erase-zero",
+      "rule": 0
+    }
+  ],
+  "right_terminal": [
+    1,
+    1
+  ],
+  "schema": "pvso-nonconfluence-witness-1"
+}

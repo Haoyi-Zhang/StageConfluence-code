@@ -1,0 +1,1 @@
+{"family": "A-C3-one-rewrite", "field_mismatches": 0, "instances_checked": 1000}

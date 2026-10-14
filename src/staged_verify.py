@@ -22,6 +22,17 @@ def _require(condition: bool, message: str) -> None:
         raise ValueError(message)
 
 
+def _exact(value: Any, expected: Any) -> bool:
+    """JSON equality without Python's bool/int/float coercions."""
+    if type(value) is not type(expected):
+        return False
+    if isinstance(expected, (list, tuple)):
+        return len(value) == len(expected) and all(_exact(a, b) for a, b in zip(value, expected))
+    if isinstance(expected, dict):
+        return value.keys() == expected.keys() and all(_exact(value[k], expected[k]) for k in expected)
+    return value == expected
+
+
 def _remaining_heights(instance: StagedInstance) -> tuple[int, ...]:
     """Compute the lattice coheight table from the explicit order relation."""
     lat = instance.lattice
@@ -46,7 +57,7 @@ def _measure(instance: StagedInstance, state: State, rem: tuple[int, ...]) -> in
 def _event_transition(instance: StagedInstance, state: State, event: Any) -> tuple[State, str | None, str]:
     _require(isinstance(event, dict), "event must be an object")
     kind, rule = event.get("kind"), event.get("rule")
-    _require(kind in {"analysis", "rewrite"}, "invalid event kind")
+    _require(kind in ("analysis", "rewrite"), "invalid event kind")
     _require(type(rule) is int, "event rule must be an integer")
     program, fact = state
     if kind == "analysis":
@@ -118,7 +129,7 @@ def verify_confluence_certificate(instance: StagedInstance, cert: Any) -> dict[s
     _require(cert.get("schema") == "pvso-confluence-certificate-1", "wrong certificate schema")
     _require(cert.get("instance") == instance.name, "instance name mismatch")
     rem = _remaining_heights(instance)
-    _require(cert.get("remaining_heights") == list(rem), "remaining-height mismatch")
+    _require(_exact(cert.get("remaining_heights"), list(rem)), "remaining-height mismatch")
 
     states_raw, edges_raw = cert.get("states"), cert.get("edges")
     _require(isinstance(states_raw, list) and states_raw, "invalid state list")
@@ -130,7 +141,7 @@ def verify_confluence_certificate(instance: StagedInstance, cert: Any) -> dict[s
     outgoing_ids: list[list[int]] = []
     parent_edges: list[int | None] = []
     for sid, row in enumerate(states_raw):
-        _require(isinstance(row, dict) and row.get("id") == sid, "noncanonical state id")
+        _require(isinstance(row, dict) and _exact(row.get("id"), sid), "noncanonical state id")
         p, f = row.get("program"), row.get("fact")
         _require(type(p) is int and 0 <= p < len(instance.programs), "invalid state program")
         _require(type(f) is int and 0 <= f < instance.lattice.n, "invalid state fact")
@@ -138,7 +149,7 @@ def verify_confluence_certificate(instance: StagedInstance, cert: Any) -> dict[s
         _require(state not in seen_states, "duplicate state")
         seen_states.add(state)
         states.append(state)
-        _require(row.get("measure") == _measure(instance, state, rem), "state measure mismatch")
+        _require(_exact(row.get("measure"), _measure(instance, state, rem)), "state measure mismatch")
         out = row.get("outgoing")
         _require(isinstance(out, list) and all(type(i) is int for i in out), "invalid outgoing list")
         outgoing_ids.append(out)
@@ -153,7 +164,7 @@ def verify_confluence_certificate(instance: StagedInstance, cert: Any) -> dict[s
 
     edge_sigs: list[tuple[Any, ...]] = []
     for eid, row in enumerate(edges_raw):
-        _require(isinstance(row, dict) and row.get("id") == eid, "noncanonical edge id")
+        _require(isinstance(row, dict) and _exact(row.get("id"), eid), "noncanonical edge id")
         src, dst = row.get("source"), row.get("target")
         _require(type(src) is int and 0 <= src < len(states), "invalid edge source")
         _require(type(dst) is int and 0 <= dst < len(states), "invalid edge target")
@@ -206,7 +217,7 @@ def verify_confluence_certificate(instance: StagedInstance, cert: Any) -> dict[s
     _require(isinstance(closures_raw, list) and len(closures_raw) == len(expected_pairs),
              "closure coverage mismatch")
     for row, pair in zip(closures_raw, expected_pairs):
-        _require(isinstance(row, dict) and (row.get("program"), row.get("fact")) == pair,
+        _require(isinstance(row, dict) and _exact((row.get("program"), row.get("fact")), pair),
                  "noncanonical closure row")
         program, current = pair
         trace = row.get("trace")
@@ -218,7 +229,7 @@ def verify_confluence_certificate(instance: StagedInstance, cert: Any) -> dict[s
             _require(target != current, "closure trace contains a stutter")
             current = target
         _require(all(rule.table[current] == current for rule in rules), "closure trace does not end fixed")
-        _require(row.get("final") == current, "closure final mismatch")
+        _require(_exact(row.get("final"), current), "closure final mismatch")
 
     peaks_raw = cert.get("peaks")
     _require(isinstance(peaks_raw, list), "invalid peak list")
@@ -227,7 +238,7 @@ def verify_confluence_certificate(instance: StagedInstance, cert: Any) -> dict[s
     for row, expected in zip(peaks_raw, expected_peaks):
         _require(isinstance(row, dict), "invalid peak row")
         sid, left_id, right_id = expected
-        _require((row.get("state"), row.get("left_edge"), row.get("right_edge")) == expected,
+        _require(_exact((row.get("state"), row.get("left_edge"), row.get("right_edge")), expected),
                  "noncanonical peak row")
         left, right = edge_sigs[left_id], edge_sigs[right_id]
         _require(row.get("kind") == _peak_kind(left, right), "peak kind mismatch")
@@ -244,7 +255,7 @@ def verify_confluence_certificate(instance: StagedInstance, cert: Any) -> dict[s
             _require(current == states[join_id], "join path ends at the wrong state")
 
     semantics = _truth_tables(instance)
-    _require(cert.get("semantics") == semantics, "semantic table mismatch")
+    _require(_exact(cert.get("semantics"), semantics), "semantic table mismatch")
     expected_claims = {
         "terminating": True,
         "locally_confluent": True,
@@ -252,7 +263,7 @@ def verify_confluence_certificate(instance: StagedInstance, cert: Any) -> dict[s
         "unique_terminal_state": len(terminals) == 1,
         "all_rewrites_preserve_observation": semantics["all_rewrites_preserve_observation"],
     }
-    _require(cert.get("claims") == expected_claims, "claim summary mismatch")
+    _require(_exact(cert.get("claims"), expected_claims), "claim summary mismatch")
     return {
         "valid": True,
         "states": len(states),
@@ -285,8 +296,8 @@ def verify_nonconfluence_witness(instance: StagedInstance, witness: Any) -> dict
     left_events, right_events = witness.get("left"), witness.get("right")
     _require(isinstance(left_events, list) and isinstance(right_events, list), "invalid witness paths")
     left, right = _replay(instance, left_events), _replay(instance, right_events)
-    _require(witness.get("left_terminal") == list(left), "left terminal mismatch")
-    _require(witness.get("right_terminal") == list(right), "right terminal mismatch")
+    _require(_exact(witness.get("left_terminal"), list(left)), "left terminal mismatch")
+    _require(_exact(witness.get("right_terminal"), list(right)), "right terminal mismatch")
     _require(not _successor_signatures(instance, left) and not _successor_signatures(instance, right),
              "witness path is not terminal")
     _require(left != right, "witness terminals are identical")

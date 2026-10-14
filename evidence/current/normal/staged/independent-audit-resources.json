@@ -1,0 +1,9 @@
+{
+  "cumulative_cpu_seconds": 25.234375,
+  "cumulative_wall_seconds": 25.40747459998238,
+  "maximum_concurrent_parts": 1,
+  "maximum_part_peak_rss_kib": 21012,
+  "note": "Resource totals sum isolated part bodies; scientific aggregate fields are deterministic.",
+  "parts": 7,
+  "workers_per_part": 1
+}

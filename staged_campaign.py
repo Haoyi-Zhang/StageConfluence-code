@@ -234,6 +234,11 @@ def run_campaign(out: Path, selected: set[str] | None = None, limit: int | None 
     """Run the deterministic staged-system family campaign and write its evidence."""
     out.mkdir(parents=True, exist_ok=True)
     selected = selected or set()
+    known = {name for name, _, _ in families()}
+    if selected - known:
+        raise ValueError(f'unknown campaign families: {sorted(selected - known)}')
+    if limit is not None and (type(limit) is not int or limit <= 0):
+        raise ValueError('pilot limit must be a positive integer')
     rows = []
     examples = {}
     campaign_cpu = time.process_time()

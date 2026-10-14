@@ -1,0 +1,12 @@
+{
+  "distinct_syntax_equivalent_pairs": 476,
+  "expressions": 56,
+  "final_only_unique_and_preserving_pairs": 3136,
+  "ordered_pairs": 3136,
+  "runtime_inputs": 4,
+  "semantic_guard_preserving_pairs": 3136,
+  "semantically_preserving_eager_pairs": 532,
+  "semantically_wrong_eager_pairs": 2604,
+  "syntax_guard_unique_and_preserving_pairs": 3136,
+  "unique_eager_syntax": 56
+}

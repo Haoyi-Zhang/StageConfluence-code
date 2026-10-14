@@ -4,7 +4,11 @@
 
 The study began with the proposed claim that alternating forward and prophecy-variable analyses should converge to a schedule-independent optimized program. A two-state one-slot counterexample showed that fact convergence alone cannot establish syntactic uniqueness. The question was then reformulated around code-changing systems, where analysis and rewrite steps are both scheduler choices.
 
-Ten substantively different formulations were compared before scientific lock. The retained fragment uses a finite lattice, a finite residual-program catalog, globally monotone inflationary analysis updates, arbitrary finite rewrite guards, globally monotone inflationary fact transfers and a strict natural-number rewrite rank. The exact and modular confluence statements were separated so that the modular condition could be falsified without invalidating the exact theorem.
+The retained fragment has a finite lattice and residual catalog, globally
+monotone inflationary analyses and transfers, arbitrary finite guards, and
+strict natural rewrite ranks. Exact confluence and sufficient modular premises
+are separated. The historical design-choice record is not experimental or
+independent novelty evidence.
 
 ## Proof method
 
@@ -36,11 +40,21 @@ A mutation campaign changes 72 claim-critical fields while preserving parseabili
 
 ## Resource and recovery method
 
-All scientific executables are single-threaded. `reproduce.py` launches one child at a time under a 3 GiB address-space cap and 180-second CPU cap. It sets deterministic Python hash behavior and suppresses bytecode generation. After a child succeeds, the driver structurally parses its declared JSON/CSV sentinels and atomically writes a completion record bound to that exact set. Resumption skips a step only when both the record and every sentinel remain valid; partial nonempty output is not completion.
+The 24-stage driver launches one child at a time and propagates optimization
+mode. Default POSIX execution retains CPU/address-space limits; explicit
+portable Windows execution has a child wall timeout without those caps.
+Completion records bind source/input bytes, Python version/mode, argv,
+execution scope and all produced files. Structural parsing alone is not
+completion. Resource observations and scientific equality remain distinct.
 
 A preliminary design ran the legacy and staged campaigns in one long-lived interpreter. It was abandoned after allocator and garbage-collection state caused substantial cross-campaign slowdown. Process isolation fixed the engineering problem without changing inputs or results. Failed or partial outputs are not included in claims.
 
 ## Literature method
 
-Closest work was read for definitions and guarantee boundaries before the theorem was locked. Metadata, venue, pages and persistent identifiers were cross-checked against publisher, DOI, arXiv, DBLP, library or author records where available. The calibration inventory includes 13 TOPLAS articles, influential rewriting/data-flow foundations and adjacent staging, compiler-validation and prophecy/history work. `literature/inspection.md` records technical roles, `literature/reference-audit.csv` records citation-level metadata, and `literature/identifier-audit.csv` records one verification source and field-level agreement for all 49 cited entries.
-
+The dated literature record preserves the earlier calibration scope. Current
+metadata tables cover the 52 existing references; local agreement does not
+certify 52 freshly read full texts. Current primary passages and inaccessible
+material are listed in `literature/inspection.md`. Saturated certificates
+instantiate normalization and confluence, not a new general principle or a
+verified kernel. Same-table direct classification and full-graph proof routes
+prevent compression from being presented as an invented speedup.

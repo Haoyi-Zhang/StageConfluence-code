@@ -1,0 +1,9 @@
+{
+  "label": "staged-enumeration",
+  "schema": "pvso-reproduction-step-1",
+  "sentinels": [
+    "staged/staged-enumeration-summary.json",
+    "staged/staged-enumeration-families.csv",
+    "staged/staged-enumeration-examples.json"
+  ]
+}

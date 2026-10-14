@@ -439,6 +439,34 @@ The generator and verifier share the validated instance representation and
 Boolean evaluator but not graph exploration or join search.  This is useful
 separation, not an independent mechanized proof of the general metatheory.
 
+## 8a. Saturated evidence and terminal-set correspondence
+
+Assume global GP and enabled-fact CC. For any full-reachable s=(p,x), let
+N(s)=(p,C_p(x)). Then NF_full(s)=NF_sat(N(s)), with exact program/fact equality.
+For the forward inclusion, project a full terminal path by Lemma 5.3. A full
+normal state is closed and has no enabled rewrite, so normalization fixes it
+and it is saturated-normal. Conversely first analyze s to N(s), expand a
+saturated path to full rewrite/analysis steps, and observe that a saturated
+normal endpoint is closed with no original rewrite enabled. It is full-normal.
+Neither inclusion uses SLC. Under termination a singleton root normal-form
+set implies confluence of every root descendant, because each nonempty
+descendant normal-form set is contained in the root set. Thus GP+CC implies
+full rooted confluence iff SLC. Outside GP+CC no equivalence is asserted.
+
+The modular certificate consumer replays one original closure trace for every
+P x L pair, checks each endpoint fixed, and globally checks GP and enabled-fact
+CC. From these proved closures it derives identity analyses, guards
+g_hat_r(x)=(x=C_p(x) and g_r(x)), transfers tau_hat_r(x)=C_q(tau_r(x)), and root
+N(s0). These transfers remain monotone and inflationary. The existing exact
+graph-replay kernel then certifies that derived rooted relation. All reachable
+states are closed, so it is exactly the saturated relation. Exact rooted graph
+coverage and joined peaks establish SLC. The modular theorem and terminal-set
+correspondence transfer confluence and terminal semantics back to the original
+instance. Expressions and rewrite endpoints are unchanged, so global semantic
+diagnostics also agree. Kernel/parser/evaluator reuse is explicit; this is not
+an independent proof-assistant implementation. Failed modular premises select
+the exact full-graph fallback, not a negative confluence conclusion.
+
 ## 9. Scope boundaries
 
 The theorems depend on all of the following:

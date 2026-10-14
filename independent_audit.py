@@ -20,6 +20,7 @@ from typing import Iterable
 from src.staged_model import StagedInstance
 from staged_campaign import classify as primary_classify
 from staged_campaign import families
+from src.runtime_support import peak_rss_kib
 
 State = tuple[int, int]
 Edge = tuple[str, int, State]
@@ -292,11 +293,13 @@ def run(
     start: int = 0,
     stop: int | None = None,
 ) -> dict[str, object]:
-    # POSIX accounting is needed only by this command, not the pure classifier.
-    import resource
-
     out.mkdir(parents=True, exist_ok=True)
     selected = selected or set()
+    known = {name for name, _, _ in families()}
+    if selected - known:
+        raise ValueError(f'unknown audit families: {sorted(selected - known)}')
+    if limit is not None and (type(limit) is not int or limit <= 0):
+        raise ValueError('pilot limit must be a positive integer')
     if (start or stop is not None) and len(selected) != 1:
         raise ValueError("--start/--stop require exactly one --family")
     rows: list[dict[str, int | str]] = []
@@ -355,7 +358,7 @@ def run(
     write_json(out / "independent-audit-resources.json", {
         "cpu_seconds": time.process_time() - started_cpu,
         "wall_seconds": time.perf_counter() - started_wall,
-        "peak_rss_kib": resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
+        "peak_rss_kib": peak_rss_kib(),
         "workers": 1,
     })
     if summary["field_mismatches"]:

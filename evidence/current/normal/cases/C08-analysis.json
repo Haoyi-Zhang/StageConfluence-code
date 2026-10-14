@@ -1,0 +1,5 @@
+{
+  "error": "map 0: nonmonotone at 0 <= 2",
+  "expected_rejection": true,
+  "name": "C08"
+}

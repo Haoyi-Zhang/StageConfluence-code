@@ -1,0 +1,406 @@
+{
+  "claims": {
+    "all_rewrites_preserve_observation": true,
+    "globally_confluent": true,
+    "locally_confluent": true,
+    "terminating": true,
+    "unique_terminal_state": true
+  },
+  "closures": [
+    {
+      "fact": 0,
+      "final": 3,
+      "program": 0,
+      "trace": [
+        0,
+        1
+      ]
+    },
+    {
+      "fact": 1,
+      "final": 3,
+      "program": 0,
+      "trace": [
+        1
+      ]
+    },
+    {
+      "fact": 2,
+      "final": 3,
+      "program": 0,
+      "trace": [
+        0
+      ]
+    },
+    {
+      "fact": 3,
+      "final": 3,
+      "program": 0,
+      "trace": []
+    },
+    {
+      "fact": 0,
+      "final": 2,
+      "program": 1,
+      "trace": [
+        1
+      ]
+    },
+    {
+      "fact": 1,
+      "final": 3,
+      "program": 1,
+      "trace": [
+        1
+      ]
+    },
+    {
+      "fact": 2,
+      "final": 2,
+      "program": 1,
+      "trace": []
+    },
+    {
+      "fact": 3,
+      "final": 3,
+      "program": 1,
+      "trace": []
+    },
+    {
+      "fact": 0,
+      "final": 1,
+      "program": 2,
+      "trace": [
+        0
+      ]
+    },
+    {
+      "fact": 1,
+      "final": 1,
+      "program": 2,
+      "trace": []
+    },
+    {
+      "fact": 2,
+      "final": 3,
+      "program": 2,
+      "trace": [
+        0
+      ]
+    },
+    {
+      "fact": 3,
+      "final": 3,
+      "program": 2,
+      "trace": []
+    },
+    {
+      "fact": 0,
+      "final": 0,
+      "program": 3,
+      "trace": []
+    },
+    {
+      "fact": 1,
+      "final": 1,
+      "program": 3,
+      "trace": []
+    },
+    {
+      "fact": 2,
+      "final": 2,
+      "program": 3,
+      "trace": []
+    },
+    {
+      "fact": 3,
+      "final": 3,
+      "program": 3,
+      "trace": []
+    }
+  ],
+  "edges": [
+    {
+      "direction": "forward",
+      "id": 0,
+      "kind": "analysis",
+      "name": "discover-history",
+      "rule": 0,
+      "source": 0,
+      "target": 1
+    },
+    {
+      "direction": "prophecy",
+      "id": 1,
+      "kind": "analysis",
+      "name": "discover-prophecy",
+      "rule": 1,
+      "source": 0,
+      "target": 2
+    },
+    {
+      "direction": "prophecy",
+      "id": 2,
+      "kind": "analysis",
+      "name": "discover-prophecy",
+      "rule": 1,
+      "source": 1,
+      "target": 3
+    },
+    {
+      "direction": null,
+      "id": 3,
+      "kind": "rewrite",
+      "name": "simplify-and",
+      "rule": 0,
+      "source": 1,
+      "target": 4
+    },
+    {
+      "direction": "forward",
+      "id": 4,
+      "kind": "analysis",
+      "name": "discover-history",
+      "rule": 0,
+      "source": 2,
+      "target": 3
+    },
+    {
+      "direction": null,
+      "id": 5,
+      "kind": "rewrite",
+      "name": "simplify-or",
+      "rule": 1,
+      "source": 2,
+      "target": 5
+    },
+    {
+      "direction": null,
+      "id": 6,
+      "kind": "rewrite",
+      "name": "simplify-and",
+      "rule": 0,
+      "source": 3,
+      "target": 4
+    },
+    {
+      "direction": null,
+      "id": 7,
+      "kind": "rewrite",
+      "name": "simplify-or",
+      "rule": 1,
+      "source": 3,
+      "target": 5
+    },
+    {
+      "direction": null,
+      "id": 8,
+      "kind": "rewrite",
+      "name": "finish-or",
+      "rule": 2,
+      "source": 4,
+      "target": 6
+    },
+    {
+      "direction": null,
+      "id": 9,
+      "kind": "rewrite",
+      "name": "finish-and",
+      "rule": 3,
+      "source": 5,
+      "target": 6
+    }
+  ],
+  "initial_state": 0,
+  "instance": "S09-confluent-diamond-with-top-transfer",
+  "peaks": [
+    {
+      "join": 3,
+      "kind": "analysis/analysis",
+      "left_edge": 0,
+      "left_path": [
+        2
+      ],
+      "right_edge": 1,
+      "right_path": [
+        4
+      ],
+      "state": 0
+    },
+    {
+      "join": 4,
+      "kind": "analysis/rewrite",
+      "left_edge": 2,
+      "left_path": [
+        6
+      ],
+      "right_edge": 3,
+      "right_path": [],
+      "state": 1
+    },
+    {
+      "join": 5,
+      "kind": "analysis/rewrite",
+      "left_edge": 4,
+      "left_path": [
+        7
+      ],
+      "right_edge": 5,
+      "right_path": [],
+      "state": 2
+    },
+    {
+      "join": 6,
+      "kind": "rewrite/rewrite",
+      "left_edge": 6,
+      "left_path": [
+        8
+      ],
+      "right_edge": 7,
+      "right_path": [
+        9
+      ],
+      "state": 3
+    }
+  ],
+  "remaining_heights": [
+    2,
+    1,
+    1,
+    0
+  ],
+  "schema": "pvso-confluence-certificate-1",
+  "semantics": {
+    "all_programs_source_equivalent": true,
+    "all_rewrites_preserve_observation": true,
+    "program_truth_tables": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        1
+      ]
+    ],
+    "rewrites": [
+      {
+        "name": "simplify-and",
+        "preserves": true,
+        "rule": 0,
+        "source": "p0",
+        "target": "p1"
+      },
+      {
+        "name": "simplify-or",
+        "preserves": true,
+        "rule": 1,
+        "source": "p0",
+        "target": "p2"
+      },
+      {
+        "name": "finish-or",
+        "preserves": true,
+        "rule": 2,
+        "source": "p1",
+        "target": "p3"
+      },
+      {
+        "name": "finish-and",
+        "preserves": true,
+        "rule": 3,
+        "source": "p2",
+        "target": "p3"
+      }
+    ],
+    "source_truth_table": [
+      0,
+      1
+    ]
+  },
+  "states": [
+    {
+      "fact": 0,
+      "id": 0,
+      "measure": 8,
+      "outgoing": [
+        0,
+        1
+      ],
+      "parent_edge": null,
+      "program": 0
+    },
+    {
+      "fact": 1,
+      "id": 1,
+      "measure": 7,
+      "outgoing": [
+        2,
+        3
+      ],
+      "parent_edge": 0,
+      "program": 0
+    },
+    {
+      "fact": 2,
+      "id": 2,
+      "measure": 7,
+      "outgoing": [
+        4,
+        5
+      ],
+      "parent_edge": 1,
+      "program": 0
+    },
+    {
+      "fact": 3,
+      "id": 3,
+      "measure": 6,
+      "outgoing": [
+        6,
+        7
+      ],
+      "parent_edge": 2,
+      "program": 0
+    },
+    {
+      "fact": 3,
+      "id": 4,
+      "measure": 3,
+      "outgoing": [
+        8
+      ],
+      "parent_edge": 3,
+      "program": 1
+    },
+    {
+      "fact": 3,
+      "id": 5,
+      "measure": 3,
+      "outgoing": [
+        9
+      ],
+      "parent_edge": 5,
+      "program": 2
+    },
+    {
+      "fact": 3,
+      "id": 6,
+      "measure": 0,
+      "outgoing": [],
+      "parent_edge": 8,
+      "program": 3
+    }
+  ],
+  "terminals": [
+    6
+  ]
+}

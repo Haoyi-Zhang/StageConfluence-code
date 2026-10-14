@@ -14,6 +14,7 @@ from src.staged_model import load_staged_instance
 from src.staged_checker import analyze_staged
 from src.staged_certificate import make_confluence_certificate, make_nonconfluence_witness
 from src.staged_verify import verify_confluence_certificate, verify_nonconfluence_witness
+from src.runtime_support import peak_rss_kib
 
 POSITIVE = ("S01", "S07", "S08", "S09", "S11")
 NEGATIVE = ("S02", "S03", "S04", "S10")
@@ -162,7 +163,6 @@ def generate_evidence(cases: Path, out: Path) -> dict[str, Any]:
 
 
 def main() -> int:
-    import resource
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--cases", type=Path, default=Path("staged_cases"))
@@ -173,7 +173,7 @@ def main() -> int:
     dump(args.out / "staged-evidence-resources.json", {
         "cpu_seconds": time.process_time() - started_cpu,
         "wall_seconds": time.perf_counter() - started_wall,
-        "peak_rss_kib": resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
+        "peak_rss_kib": peak_rss_kib(),
         "workers": 1,
         "children": 0,
     })

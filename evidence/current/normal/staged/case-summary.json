@@ -1,0 +1,142 @@
+{
+  "cases": [
+    {
+      "case": "S01",
+      "edges": 12,
+      "evidence": "confluence-certificate",
+      "instance": "S01-confluent-bidirectional-diamond",
+      "local_peaks": 4,
+      "modular_criterion": true,
+      "reachable_states": 9,
+      "source_equivalent_program": true,
+      "state_confluent": true,
+      "unique_terminal_program": true,
+      "verified": true
+    },
+    {
+      "case": "S02",
+      "edges": 11,
+      "evidence": "nonconfluence-witness",
+      "instance": "S02-unjoined-rewrite-peak",
+      "local_peaks": 4,
+      "modular_criterion": false,
+      "reachable_states": 9,
+      "source_equivalent_program": false,
+      "state_confluent": false,
+      "unique_terminal_program": false,
+      "verified": true
+    },
+    {
+      "case": "S03",
+      "edges": 4,
+      "evidence": "nonconfluence-witness",
+      "instance": "S03-closure-commutation-failure",
+      "local_peaks": 1,
+      "modular_criterion": false,
+      "reachable_states": 5,
+      "source_equivalent_program": false,
+      "state_confluent": false,
+      "unique_terminal_program": false,
+      "verified": true
+    },
+    {
+      "case": "S04",
+      "edges": 2,
+      "evidence": "nonconfluence-witness",
+      "instance": "S04-guard-persistence-failure",
+      "local_peaks": 1,
+      "modular_criterion": false,
+      "reachable_states": 3,
+      "source_equivalent_program": false,
+      "state_confluent": false,
+      "unique_terminal_program": false,
+      "verified": true
+    },
+    {
+      "case": "S07",
+      "edges": 1,
+      "evidence": "confluence-certificate",
+      "instance": "S07-semantics-breaking-rewrite",
+      "local_peaks": 0,
+      "modular_criterion": true,
+      "reachable_states": 2,
+      "source_equivalent_program": false,
+      "state_confluent": true,
+      "unique_terminal_program": true,
+      "verified": true
+    },
+    {
+      "case": "S08",
+      "edges": 4,
+      "evidence": "confluence-certificate",
+      "instance": "S08-confluent-outside-modular-fragment",
+      "local_peaks": 1,
+      "modular_criterion": false,
+      "reachable_states": 4,
+      "source_equivalent_program": true,
+      "state_confluent": true,
+      "unique_terminal_program": true,
+      "verified": true
+    },
+    {
+      "case": "S09",
+      "edges": 10,
+      "evidence": "confluence-certificate",
+      "instance": "S09-confluent-diamond-with-top-transfer",
+      "local_peaks": 4,
+      "modular_criterion": true,
+      "reachable_states": 7,
+      "source_equivalent_program": true,
+      "state_confluent": true,
+      "unique_terminal_program": true,
+      "verified": true
+    },
+    {
+      "case": "S10",
+      "edges": 3,
+      "evidence": "nonconfluence-witness",
+      "instance": "S10-program-confluent-state-nonconfluent",
+      "local_peaks": 1,
+      "modular_criterion": false,
+      "reachable_states": 4,
+      "source_equivalent_program": true,
+      "state_confluent": false,
+      "unique_terminal_program": true,
+      "verified": true
+    },
+    {
+      "case": "S11",
+      "edges": 1,
+      "evidence": "confluence-certificate",
+      "instance": "S11-unreachable-bad-rewrite",
+      "local_peaks": 0,
+      "modular_criterion": true,
+      "reachable_states": 2,
+      "source_equivalent_program": true,
+      "state_confluent": true,
+      "unique_terminal_program": true,
+      "verified": true
+    }
+  ],
+  "mutation_summary": {
+    "accepted": 0,
+    "basis": "single-field mutations of S01 certificate and all retained negative witnesses",
+    "mutations": 72,
+    "rejected": 72,
+    "schema": "pvso-mutation-campaign-1"
+  },
+  "negative_witnesses": [
+    "S02",
+    "S03",
+    "S04",
+    "S10"
+  ],
+  "positive_certificates": [
+    "S01",
+    "S07",
+    "S08",
+    "S09",
+    "S11"
+  ],
+  "schema": "pvso-case-evidence-1"
+}

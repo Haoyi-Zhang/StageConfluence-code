@@ -70,7 +70,7 @@ class ReproductionCompletion(unittest.TestCase):
             self.assertTrue(step_complete(output, "child-step", [sentinel], markers))
             self.assertFalse(records[0]["skipped_completed"])
             second: list[dict[str, object]] = []
-            run(output, "child-step", [sys.executable, "-c", "raise SystemExit(99)"],
+            run(output, "child-step", [sys.executable, "-c", code, str(sentinel)],
                 [sentinel], markers, second)
             self.assertTrue(second[0]["skipped_completed"])
             self.assertEqual(second[0]["returncode"], 0)

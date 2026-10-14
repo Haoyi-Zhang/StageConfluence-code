@@ -1,0 +1,2 @@
+lattice,first_map,second_map,cases,incomplete_cases,complete_unique_cases,complete_multiple_cases,formula_mismatches,maximal_guard_checks,persistent_guard_checks,strict_transition_guard_advantage_emitters
+C1,0,0,4,2,2,0,0,2,2,0

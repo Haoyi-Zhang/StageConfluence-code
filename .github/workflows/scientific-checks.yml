@@ -35,7 +35,9 @@ jobs:
             python -B tests/state_admission_regression.py
             python -B -O tests/state_admission_regression.py
             python -B reproduce.py "$SCIENTIFIC_OUTPUT/results"
-            python -B compare_results.py results "$SCIENTIFIC_OUTPUT/results"
+            python -B -O reproduce.py "$SCIENTIFIC_OUTPUT/optimized"
+            python -B compare_results.py evidence/current/normal "$SCIENTIFIC_OUTPUT/results"
+            python -B compare_results.py "$SCIENTIFIC_OUTPUT/results" "$SCIENTIFIC_OUTPUT/optimized"
           ' 2>&1 | tee "$SCIENTIFIC_OUTPUT/run.log"
       - name: Upload raw logs and generated outputs, including failed runs
         if: always()

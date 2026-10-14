@@ -1,0 +1,16 @@
+{
+  "lattice": "C2",
+  "map_count": 2,
+  "first_map_start": 0,
+  "first_map_stop": 2,
+  "map_pairs": 4,
+  "cases": 64,
+  "wall_seconds": 0.0006443999882321805,
+  "cpu_seconds": 0.015625,
+  "peak_rss_kib": 19512,
+  "workers": 1,
+  "children": 0,
+  "timeouts": 0,
+  "selection": "all ordered map pairs in the specified outer-index range; all binary emitters and guards",
+  "seeds": null
+}

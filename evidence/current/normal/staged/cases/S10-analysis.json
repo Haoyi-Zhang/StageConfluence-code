@@ -1,0 +1,141 @@
+{
+  "analysis_directions": [
+    "forward",
+    "prophecy"
+  ],
+  "closure_commutation": false,
+  "closure_commutation_failures": [
+    {
+      "early_target_closure": 0,
+      "fact": 0,
+      "late_target_closure": 1,
+      "rewrite": 0,
+      "source_closure": 1
+    }
+  ],
+  "edge_count": 3,
+  "exact_local_peak_criterion": false,
+  "fact_height": 1,
+  "global_confluence": false,
+  "guard_persistence": true,
+  "guard_persistence_failures": [],
+  "initial_normal_forms": [
+    [
+      1,
+      0
+    ],
+    [
+      1,
+      1
+    ]
+  ],
+  "instance": {
+    "facts": 2,
+    "initial": [
+      "p0",
+      "none"
+    ],
+    "lattice": "C2",
+    "name": "S10-program-confluent-state-nonconfluent",
+    "programs": 2,
+    "rewrites": 1
+  },
+  "local_peak_counts": {
+    "analysis/analysis": 0,
+    "analysis/rewrite": 1,
+    "rewrite/rewrite": 0
+  },
+  "modular_saturation_criterion": false,
+  "newman_equivalence_holds": true,
+  "peaks": [
+    {
+      "joinable": false,
+      "kind": "analysis/rewrite",
+      "left": {
+        "direction": "forward",
+        "kind": "analysis",
+        "name": "discover-history",
+        "rule": 0
+      },
+      "right": {
+        "kind": "rewrite",
+        "name": "erase-zero",
+        "rule": 0
+      },
+      "state": [
+        0,
+        0
+      ]
+    }
+  ],
+  "reachable_state_count": 4,
+  "reachable_states": [
+    [
+      0,
+      0
+    ],
+    [
+      0,
+      1
+    ],
+    [
+      1,
+      0
+    ],
+    [
+      1,
+      1
+    ]
+  ],
+  "saturated_rewrite_peak_failures": [],
+  "saturated_rewrite_peaks_join": true,
+  "schedule_independent_source_equivalent_program": true,
+  "schema": "pvso-analysis-1",
+  "semantic_preservation": {
+    "all_programs_source_equivalent": true,
+    "all_rewrites_preserve_observation": true,
+    "program_truth_tables": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        1
+      ]
+    ],
+    "reachable_rewrite_rules": [
+      0
+    ],
+    "reachable_rewrites_preserve_observation": true,
+    "rewrites": [
+      {
+        "name": "erase-zero",
+        "preserves": true,
+        "rule": 0,
+        "source": "p0",
+        "target": "p1"
+      }
+    ],
+    "source_truth_table": [
+      0,
+      1
+    ],
+    "unique_terminal_program_source_equivalent": true
+  },
+  "terminal_states": [
+    [
+      1,
+      0
+    ],
+    [
+      1,
+      1
+    ]
+  ],
+  "termination_measure_failures": [],
+  "termination_measure_valid": true,
+  "unique_terminal_program": true,
+  "unique_terminal_state": false,
+  "unjoinable_local_peak_count": 1
+}

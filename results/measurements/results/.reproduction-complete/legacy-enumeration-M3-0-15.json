@@ -1,0 +1,8 @@
+{
+  "label": "legacy-enumeration-M3-0-15",
+  "schema": "pvso-reproduction-step-1",
+  "sentinels": [
+    "enumeration/M3-000-015.csv",
+    "enumeration/M3-000-015.json"
+  ]
+}

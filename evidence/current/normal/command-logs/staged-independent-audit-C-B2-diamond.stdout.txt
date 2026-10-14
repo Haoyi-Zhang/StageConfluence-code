@@ -1,0 +1,1 @@
+{"family": "C-B2-diamond", "field_mismatches": 0, "instances_checked": 160000}

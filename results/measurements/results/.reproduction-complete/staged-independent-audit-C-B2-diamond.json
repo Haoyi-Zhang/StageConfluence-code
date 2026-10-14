@@ -1,0 +1,9 @@
+{
+  "label": "staged-independent-audit-C-B2-diamond",
+  "schema": "pvso-reproduction-step-1",
+  "sentinels": [
+    "staged/independent-audit-parts/C-B2-diamond/independent-audit-summary.json",
+    "staged/independent-audit-parts/C-B2-diamond/independent-audit-families.csv",
+    "staged/independent-audit-parts/C-B2-diamond/independent-audit-resources.json"
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "case": "S07",
+  "expected": {
+    "confluent": true,
+    "terminal_programs_source_equivalent": false
+  },
+  "input": {
+    "fact_labels": [
+      "none",
+      "H"
+    ],
+    "initial_fact": 0,
+    "initial_program": "p0",
+    "inputs": 1,
+    "lattice": {
+      "kind": "chain",
+      "size": 2
+    },
+    "name": "S07-semantics-breaking-rewrite",
+    "programs": [
+      {
+        "analyses": [
+          {
+            "direction": "forward",
+            "name": "fixed",
+            "table": [
+              0,
+              1
+            ]
+          }
+        ],
+        "expression": [
+          "var",
+          0
+        ],
+        "name": "p0",
+        "rank": 1
+      },
+      {
+        "analyses": [
+          {
+            "direction": "prophecy",
+            "name": "fixed",
+            "table": [
+              0,
+              1
+            ]
+          }
+        ],
+        "expression": [
+          "not",
+          [
+            "var",
+            0
+          ]
+        ],
+        "name": "p1",
+        "rank": 0
+      }
+    ],
+    "rewrites": [
+      {
+        "guard": [
+          true,
+          true
+        ],
+        "name": "negate",
+        "source": "p0",
+        "target": "p1",
+        "transfer": [
+          0,
+          1
+        ]
+      }
+    ],
+    "source_expression": [
+      "var",
+      0
+    ]
+  },
+  "routes": {
+    "full-proof": {
+      "kind": "full",
+      "outcome": {
+        "confluent": true,
+        "terminal_programs_source_equivalent": false
+      }
+    },
+    "modular-with-exact-fallback": {
+      "kind": "modular",
+      "outcome": {
+        "confluent": true,
+        "terminal_programs_source_equivalent": false
+      }
+    },
+    "ordinary-direct": {
+      "kind": "direct-decision",
+      "outcome": {
+        "confluent": true,
+        "terminal_programs_source_equivalent": false
+      }
+    }
+  }
+}

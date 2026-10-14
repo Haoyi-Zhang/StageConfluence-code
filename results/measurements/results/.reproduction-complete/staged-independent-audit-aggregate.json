@@ -1,0 +1,9 @@
+{
+  "label": "staged-independent-audit-aggregate",
+  "schema": "pvso-reproduction-step-1",
+  "sentinels": [
+    "staged/independent-audit-summary.json",
+    "staged/independent-audit-families.csv",
+    "staged/independent-audit-resources.json"
+  ]
+}

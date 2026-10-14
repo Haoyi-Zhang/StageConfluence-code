@@ -1,0 +1,7 @@
+{"cpu_seconds": 0.0, "family": "A-C2-one-rewrite", "instances": 32}
+{"cpu_seconds": 0.015625, "family": "A-C3-one-rewrite", "instances": 1000}
+{"cpu_seconds": 0.21875, "family": "A-B2-one-rewrite", "instances": 11664}
+{"cpu_seconds": 0.015625, "family": "B-C2-fork", "instances": 512}
+{"cpu_seconds": 6.421875, "family": "B-B2-fork", "instances": 262144}
+{"cpu_seconds": 7.515625, "family": "C-B2-diamond", "instances": 160000}
+{"cpu_seconds": 0.375, "family": "D-B2-two-analysis", "instances": 16384}

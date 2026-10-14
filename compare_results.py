@@ -27,6 +27,8 @@ def selected(root: Path) -> dict[Path, Path]:
         'staged/mutation-results.csv', 'staged/mutation-summary.json',
         'staged/cases/*.json', 'staged/certificates/*.json',
         'staged/witnesses/*.json',
+        'admission-summary.json', 'modular/summary.json',
+        'modular/*/*.json',
     )
     for pattern in (*legacy_patterns, *staged_patterns):
         paths.extend(root.glob(pattern))
@@ -50,6 +52,13 @@ def compare(left: Path, right: Path) -> dict[str, object]:
                     value.pop('cpu_seconds', None); value.pop('wall_seconds', None)
                     for row in value.get('families', []):
                         row.pop('cpu_seconds', None); row.pop('wall_seconds', None)
+            if key.as_posix() == 'modular/summary.json':
+                for value in (aa, bb):
+                    value.pop('host', None)
+                    value.pop('optimize', None)
+                    for row in value['comparisons']:
+                        row.pop('median_total_ns', None)
+                        row.pop('modular_full_time_ratio', None)
         else:
             aa, bb = a[key].read_text(), b[key].read_text()
             if key.name == 'staged-enumeration-families.csv':

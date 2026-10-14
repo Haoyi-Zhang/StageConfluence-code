@@ -1,0 +1,44 @@
+{
+  "all_maximal_progress_runs_complete": false,
+  "complete_source_preserving_guard_exists": true,
+  "completed_runs_preserve_source": true,
+  "factorization_matches_product_oracle": true,
+  "final_output_preserves_source": true,
+  "full_state_count": 4,
+  "least_fixed_point": 1,
+  "maximal_final_semantics_guard_reachable": [
+    0,
+    1
+  ],
+  "maximal_persistent_final_semantics_guard_reachable": [
+    0,
+    1
+  ],
+  "maximal_persistent_safe_guard_reachable": [
+    0,
+    1
+  ],
+  "maximal_safe_guard_reachable": [
+    0,
+    1
+  ],
+  "name": "C05",
+  "order_upward_safe_guard_reachable": [
+    0,
+    1
+  ],
+  "reachable_fact_states": [
+    0,
+    1
+  ],
+  "source_truth_table": [
+    0,
+    1
+  ],
+  "terminal_artifacts": [
+    "[\"var\",0]"
+  ],
+  "terminal_count": 2,
+  "transition_count_with_rule_labels": 3,
+  "unique_syntactic_output_for_all_runs": false
+}

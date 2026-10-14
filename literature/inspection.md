@@ -2,7 +2,58 @@
 
 Access date: 2026-09-19. This file records the technical role and inspected boundary of the literature used to frame the paper. Citation metadata is listed in `reference-audit.csv`; `identifier-audit.csv` records one verification source and field-level agreement for all 49 cited entries. No paper PDF is redistributed.
 
-## Closest prophecy/history work
+## Current primary-source boundary (2026-10-14)
+
+The dated 2026-09-19 entries below are historical reading/metadata records,
+not a certificate that this pass reread every article or verified every remote
+result. The bibliography now contains 52 already-cited entries; three absent
+certification-work metadata rows were supplied and the stale 49-row lint fixed.
+The lint checks agreement, not source entailment or human approval.
+
+This pass read the current manuscript and all six included proof/evidence
+appendices, the artifact proof notes and claim-critical implementations. The
+external primary checks were narrower:
+
+- Lerner/Grove/Chambers, author-hosted UW-CSE-01-11-01 technical report,
+  sections 3–6, selected appendix definitions/proof passages, and the experimental
+  discussion. Provisional replacement, final `PICK`, soundness, termination,
+  and conditional precision must not be conflated with arbitrary destructive
+  rewrite schedule independence. This was not an independent reread of every
+  appendix proof or a rerun of Vortex/Whirlwind.
+- BuildIt arXiv:2601.02653v2, section 3.1–3.5, progress/preservation definitions
+  and Algorithms 1–3, with abstract and application context. These are repeated
+  executions of the source semantics, not an adequacy theorem for this model.
+  The long code appendix and every application were not independently checked.
+- Nexis arXiv:2607.23033v1, introduction, base-language interface and full
+  section 5 (specification language, translation boundary, bitvector universe,
+  solver equivalence and dependence order). Generated specification translation
+  is unverified; generated predicates/theorems form the checked boundary.
+  PDCE/LCM Lean internals and all proofs were not independently rechecked.
+- Nagele/Felgenhauer/Zankl, publisher PDF: introduction/definitions,
+  Theorem 4.2 context and section 5.3 certificate procedure. It already uses a
+  verified certifier and structural peak factoring. The present normalization
+  instance is not a new certificate principle and is not CeTA compatible.
+- Sternagel/Thiemann CPF paper: sections 1–3 (including partial-proof limits
+  and format design). A format/producer-consumer claim is inherited, not novel.
+- Sternagel/Sternagel conditional-TRS paper: primary institutional metadata and
+  indexed abstract only. Direct PDF transfer failed; full text remains open.
+- Ryder/Paull title checked against the author publication list: the cited
+  title includes “Algorithms”; the shorter historical audit title was corrected.
+
+Official ESOP 2027 and joint ETAPS calls were checked on 2026-10-14. Research
+Paper Round 2 has an October 15, 2026 AoE deadline, allows TOPLAS/PACMPL/LNCS
+initial formats without an initial page limit, uses double-blind review, and
+requires LNCS at most 25 pages excluding bibliography after acceptance. The
+joint call requires a proceedings data-availability statement. No submission,
+retargeting, contact, or claim of compliance with every uninspected policy was
+made. Primary links: <https://etaps.org/2027/conferences/esop/> and
+<https://etaps.org/2027/cfp/>.
+
+No native BuildIt/Nexis adapter, operational-adequacy theorem, mechanized
+certificate-kernel proof, or field-wide originality certification follows from
+these readings. These remain substantive independent-review gates.
+
+## Closest prophecy/history work (historical record)
 
 ### BuildIt
 

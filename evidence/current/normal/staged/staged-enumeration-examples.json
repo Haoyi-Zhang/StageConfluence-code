@@ -1,0 +1,51 @@
+{
+  "A-B2-one-rewrite": {
+    "first_commutation_failure": "m0=1;m1=0;g=4;t=0",
+    "first_modular_false_negative": "m0=1;m1=0;g=4;t=0",
+    "first_nonconfluent": "m0=4;m1=0;g=1;t=0",
+    "first_persistence_failure": "m0=1;m1=0;g=4;t=0",
+    "first_program_only": "m0=4;m1=0;g=3;t=0"
+  },
+  "A-C2-one-rewrite": {
+    "first_commutation_failure": "m0=1;m1=0;g=1;t=0",
+    "first_nonconfluent": "m0=1;m1=0;g=1;t=0",
+    "first_persistence_failure": "m0=1;m1=0;g=1;t=0",
+    "first_program_only": "m0=1;m1=0;g=3;t=0"
+  },
+  "A-C3-one-rewrite": {
+    "first_commutation_failure": "m0=1;m1=0;g=2;t=0",
+    "first_modular_false_negative": "m0=1;m1=0;g=2;t=0",
+    "first_nonconfluent": "m0=2;m1=0;g=1;t=0",
+    "first_persistence_failure": "m0=1;m1=0;g=2;t=0",
+    "first_program_only": "m0=2;m1=0;g=3;t=0"
+  },
+  "B-B2-fork": {
+    "first_commutation_failure": "m=1,0,0;g=0,1;t=0,0",
+    "first_modular_false_negative": "m=1,0,0;g=0,4;t=0,0",
+    "first_nonconfluent": "m=0,0,0;g=1,1;t=0,0",
+    "first_persistence_failure": "m=1,0,0;g=0,1;t=0,0",
+    "first_program_only": "m=1,0,0;g=0,3;t=0,0",
+    "first_saturated_peak_failure": "m=0,0,0;g=1,1;t=0,0"
+  },
+  "B-C2-fork": {
+    "first_commutation_failure": "m=1,0,0;g=0,1;t=0,0",
+    "first_nonconfluent": "m=0,0,0;g=1,1;t=0,0",
+    "first_persistence_failure": "m=1,0,0;g=0,1;t=0,0",
+    "first_program_only": "m=1,0,0;g=0,3;t=0,0",
+    "first_saturated_peak_failure": "m=0,0,0;g=1,1;t=0,0"
+  },
+  "C-B2-diamond": {
+    "first_commutation_failure": "r0=g0/t0;r1=g0/t0;r2=g0/t0;r3=g1/t0",
+    "first_modular_false_negative": "r0=g0/t0;r1=g0/t0;r2=g0/t0;r3=g1/t0",
+    "first_nonconfluent": "r0=g0/t0;r1=g1/t0;r2=g0/t0;r3=g0/t0",
+    "first_program_only": "r0=g0/t0;r1=g1/t0;r2=g0/t0;r3=g0/t0",
+    "first_saturated_peak_failure": "r0=g1/t0;r1=g1/t0;r2=g0/t0;r3=g0/t0"
+  },
+  "D-B2-two-analysis": {
+    "first_commutation_failure": "p0=0,1;p1=0,0;g=1;t=0",
+    "first_modular_false_negative": "p0=0,1;p1=0,0;g=4;t=0",
+    "first_nonconfluent": "p0=0,1;p1=0,0;g=1;t=0",
+    "first_persistence_failure": "p0=0,1;p1=0,0;g=1;t=0",
+    "first_program_only": "p0=0,1;p1=0,0;g=3;t=0"
+  }
+}

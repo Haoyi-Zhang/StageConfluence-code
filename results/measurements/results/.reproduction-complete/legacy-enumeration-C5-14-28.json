@@ -1,0 +1,8 @@
+{
+  "label": "legacy-enumeration-C5-14-28",
+  "schema": "pvso-reproduction-step-1",
+  "sentinels": [
+    "enumeration/C5-014-028.csv",
+    "enumeration/C5-014-028.json"
+  ]
+}

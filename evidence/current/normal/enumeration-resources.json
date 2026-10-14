@@ -1,0 +1,8 @@
+{
+  "chunks": 10,
+  "cumulative_measured_cpu_seconds": 8.390625,
+  "cumulative_measured_wall_seconds": 8.475288099987665,
+  "maximum_process_peak_rss_kib": 20076,
+  "note": "Process CPU and wall values measure chunk bodies, not shell, interpreter startup, pre-campaign work, or document compilation. Very short calls may report zero CPU at timer resolution.",
+  "timeouts": 0
+}

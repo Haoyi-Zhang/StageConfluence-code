@@ -1,0 +1,2 @@
+{"cpu_seconds": 0, "family": "synthetic-gate", "instances": 1}
+{"cpu_seconds": 0, "family": "synthetic-gate", "instances": 1}

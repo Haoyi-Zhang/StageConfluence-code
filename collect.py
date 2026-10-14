@@ -12,9 +12,14 @@ from collections import defaultdict
 from src.model import (named_lattice, monotone_inflationary_maps, load_instance,
                        syntax_key, truth_table)
 from src.checker import analyze, make_witness, verify_witness, terminal_oracle, synthesize_guards
+from src.runtime_support import peak_rss_kib
 
 ROOT=Path(__file__).resolve().parent
 LATTICES=('C1','C2','C3','C4','C5','B2','M3','N5')
+
+def require(condition, message):
+    if not condition:
+        raise ValueError(message)
 
 def write_json(path, value):
     path.parent.mkdir(parents=True,exist_ok=True)
@@ -48,7 +53,7 @@ def examples(out):
 def semantic(out):
     leaves=(('var',0),('var',1),('const',0),('const',1))
     exprs=leaves+tuple(('not',e) for e in leaves)+tuple((op,a,b) for op in ('and','or','xor') for a in leaves for b in leaves)
-    assert len(exprs)==len(set(exprs))==56
+    require(len(exprs)==len(set(exprs))==56, 'expression catalog size or uniqueness mismatch')
     tables=[truth_table(e,2) for e in exprs]
     keys=[syntax_key(e) for e in exprs]
     rows=[];lat=named_lattice('C2');fs=((1,1),)
@@ -61,8 +66,8 @@ def semantic(out):
             st,_,_=terminal_oracle(0,fs,tuple(x in sg for x in range(2)),e)
             qt,_,_=terminal_oracle(0,fs,tuple(x in qg for x in range(2)),sem)
             final,_,_=terminal_oracle(0,fs,(False,True),e)
-            assert st==final=={(1,e[1])}
-            assert qt=={(1,sem[1])}
+            require(st==final=={(1,e[1])}, 'syntax-safe guard disagrees with final-only terminals')
+            require(qt=={(1,sem[1])}, 'semantic-safe guard disagrees with final-only observation')
             rows.append(dict(early=i,final=j,eager_terminal_count=len(ts),same_syntax=i==j,
                              same_truth_table=tables[i]==tables[j],syntax_guard_early=0 in sg,
                              semantic_guard_early=0 in qg,final_only_terminal_count=len(final)))
@@ -104,8 +109,9 @@ def summarize(out):
         if {k for k in keys_seen if k[0]==name} != expected:raise ValueError(f'incomplete chunk coverage: {name}')
         d=dict(lattice=name,states=lat.n,maps=m,ordered_map_pairs=len(rs))
         for k in numeric:d[k]=sum(int(r[k]) for r in rs)
-        assert d['cases']==m*m*4**lat.n
-        assert d['cases']==d['incomplete_cases']+d['complete_unique_cases']+d['complete_multiple_cases']
+        require(d['cases']==m*m*4**lat.n, 'enumeration cardinality mismatch')
+        require(d['cases']==d['incomplete_cases']+d['complete_unique_cases']+d['complete_multiple_cases'],
+                'enumeration outcome partition mismatch')
         rows.append(d)
     write_csv(out/'enumeration-summary.csv',rows)
     total={k:sum(r[k] for r in rows) for k in numeric}
@@ -121,7 +127,6 @@ def summarize(out):
     print(json.dumps(total,indent=2))
 
 if __name__=='__main__':
-    import resource
 
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('action',choices=['evidence','summarize'])
@@ -130,4 +135,4 @@ if __name__=='__main__':
     if a.action=='evidence':maps(a.out);examples(a.out);semantic(a.out);tests(a.out)
     else:summarize(a.out)
     write_json(a.out/f'{a.action}-resources.json',dict(cpu_seconds=time.process_time()-cpu,wall_seconds=time.perf_counter()-wall,
-        peak_rss_kib=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,workers=1,children=0))
+        peak_rss_kib=peak_rss_kib(),workers=1,children=0))

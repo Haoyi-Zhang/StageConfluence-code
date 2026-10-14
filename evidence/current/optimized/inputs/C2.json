@@ -1,0 +1,22 @@
+{
+  "lattice": {
+    "bottom": 0,
+    "kind": "explicit",
+    "name": "C2",
+    "top": 1,
+    "upper": [
+      3,
+      2
+    ]
+  },
+  "maps": [
+    [
+      0,
+      1
+    ],
+    [
+      1,
+      1
+    ]
+  ]
+}

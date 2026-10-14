@@ -144,7 +144,7 @@ class StagedCertificates(unittest.TestCase):
     def setUp(self):
         self.instance = case("S01")
         cert = make_confluence_certificate(self.instance)
-        assert cert is not None
+        self.assertIsNotNone(cert)
         self.cert = cert
 
     def test_positive_certificates_replay(self):
@@ -220,7 +220,7 @@ class StagedCertificates(unittest.TestCase):
     def test_mutate_witness_terminal(self):
         instance = case("S03")
         witness = make_nonconfluence_witness(instance)
-        assert witness is not None
+        self.assertIsNotNone(witness)
         witness["left_terminal"] = [0, 0]
         with self.assertRaisesRegex(ValueError, "terminal mismatch"):
             verify_nonconfluence_witness(instance, witness)
@@ -228,7 +228,7 @@ class StagedCertificates(unittest.TestCase):
     def test_mutate_witness_event(self):
         instance = case("S03")
         witness = make_nonconfluence_witness(instance)
-        assert witness is not None
+        self.assertIsNotNone(witness)
         witness["right"][0]["rule"] = 99
         with self.assertRaisesRegex(ValueError, "enabled"):
             verify_nonconfluence_witness(instance, witness)

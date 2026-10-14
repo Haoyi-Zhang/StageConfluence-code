@@ -1,0 +1,37 @@
+{
+  "instance": "S03-closure-commutation-failure",
+  "left": [
+    {
+      "kind": "rewrite",
+      "name": "commit-early",
+      "rule": 0
+    }
+  ],
+  "left_terminal": [
+    1,
+    0
+  ],
+  "right": [
+    {
+      "direction": "forward",
+      "kind": "analysis",
+      "name": "discover-history",
+      "rule": 0
+    },
+    {
+      "kind": "rewrite",
+      "name": "commit-early",
+      "rule": 0
+    },
+    {
+      "kind": "rewrite",
+      "name": "finish-if-history",
+      "rule": 1
+    }
+  ],
+  "right_terminal": [
+    2,
+    1
+  ],
+  "schema": "pvso-nonconfluence-witness-1"
+}

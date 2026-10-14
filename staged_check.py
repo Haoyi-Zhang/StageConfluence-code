@@ -14,6 +14,7 @@ from src.staged_certificate import (
     verify_confluence_certificate,
     verify_nonconfluence_witness,
 )
+from src.modular_certificate import make_modular_certificate, verify_modular_certificate
 
 MAX_JSON_BYTES = 8 * 1024 * 1024
 
@@ -36,7 +37,7 @@ def write_json(value, path: Path | None) -> None:
 def main() -> int:
     parser = argparse.ArgumentParser()
     sub = parser.add_subparsers(dest="command", required=True)
-    for name in ("analyze", "certify", "witness"):
+    for name in ("analyze", "certify", "certify-modular", "witness"):
         p = sub.add_parser(name)
         p.add_argument("instance", type=Path)
         p.add_argument("--out", type=Path)
@@ -46,6 +47,9 @@ def main() -> int:
     p = sub.add_parser("verify-witness")
     p.add_argument("instance", type=Path)
     p.add_argument("witness", type=Path)
+    p = sub.add_parser('verify-modular')
+    p.add_argument('instance', type=Path)
+    p.add_argument('certificate', type=Path)
     args = parser.parse_args()
     try:
         instance = load_staged_instance(read_json(args.instance))
@@ -56,6 +60,13 @@ def main() -> int:
             if cert is None:
                 raise ValueError("instance is not locally confluent; no positive certificate exists")
             write_json(cert, args.out)
+        elif args.command == 'certify-modular':
+            cert = make_modular_certificate(instance)
+            if cert is None:
+                raise ValueError('modular obligations fail; use exact certification or a terminal witness')
+            write_json(cert, args.out)
+        elif args.command == 'verify-modular':
+            write_json(verify_modular_certificate(instance, read_json(args.certificate)), None)
         elif args.command == "witness":
             witness = make_nonconfluence_witness(instance)
             if witness is None:

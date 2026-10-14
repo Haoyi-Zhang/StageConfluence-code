@@ -1,0 +1,12 @@
+{
+  "case": "C06",
+  "kind": "incomplete",
+  "runs": [
+    [
+      {
+        "map": 0,
+        "op": "apply"
+      }
+    ]
+  ]
+}

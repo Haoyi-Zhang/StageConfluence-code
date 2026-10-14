@@ -1,0 +1,15 @@
+{
+  "current": {
+    "deterministic_files_compared": 132,
+    "equal": true,
+    "resources_compared": false
+  },
+  "historical": {
+    "deterministic_files_compared": 93,
+    "equal": true,
+    "resources_compared": false
+  },
+  "history_scope": "93 unchanged scientific files; old 81-test inventory retained separately",
+  "path_redaction": "private absolute path prefixes replaced with <audit-workspace>/<candidate>/<python>; unredacted commands remain private",
+  "completion_markers": "private recovery manifests not redistributed; create a new output directory"
+}

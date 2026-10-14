@@ -1,0 +1,43 @@
+{
+  "claim_boundary": "Agreement cross-checks two implementations over the declared finite families; it is not a proof-assistant verification of the general metatheory.",
+  "families": [
+    "A-C2-one-rewrite"
+  ],
+  "field_comparisons": 288,
+  "field_mismatches": 0,
+  "fields_compared": [
+    "direct",
+    "local",
+    "modular",
+    "persistent",
+    "commutes",
+    "saturated",
+    "unique_program",
+    "state_count",
+    "peak_count"
+  ],
+  "instances_checked": 32,
+  "instances_with_mismatch": 0,
+  "mismatch_examples": [],
+  "pilot_limit_per_family": null,
+  "requested_range": [
+    0,
+    null
+  ],
+  "schema": "pvso-independent-audit-1",
+  "separately_implemented_components": [
+    "transition enumeration",
+    "rooted reachability",
+    "terminal-set propagation",
+    "local-peak joinability",
+    "analysis closure",
+    "guard persistence",
+    "closure commutation",
+    "saturated rewrite graph",
+    "terminal-program projection"
+  ],
+  "shared_components": [
+    "finite model dataclasses",
+    "declared family generator"
+  ]
+}

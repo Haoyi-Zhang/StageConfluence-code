@@ -1,0 +1,184 @@
+{
+  "cases": [
+    "S01",
+    "S02",
+    "S03",
+    "S04",
+    "S07",
+    "S08",
+    "S09",
+    "S10",
+    "S11"
+  ],
+  "comparisons": [
+    {
+      "case": "S01",
+      "median_total_ns": {
+        "full-proof": 812400,
+        "modular-with-exact-fallback": 1317700,
+        "ordinary-direct": 262500
+      },
+      "modular_full_byte_ratio": 0.6275826446280992,
+      "modular_full_time_ratio": 1.6219842442146726,
+      "serialized_proof_bytes": {
+        "full-proof": 3872,
+        "modular-with-exact-fallback": 2430,
+        "ordinary-direct": 0
+      }
+    },
+    {
+      "case": "S02",
+      "median_total_ns": {
+        "full-proof": 521800,
+        "modular-with-exact-fallback": 772800,
+        "ordinary-direct": 239400
+      },
+      "modular_full_byte_ratio": 1.0,
+      "modular_full_time_ratio": 1.4810272134917593,
+      "serialized_proof_bytes": {
+        "full-proof": 602,
+        "modular-with-exact-fallback": 602,
+        "ordinary-direct": 0
+      }
+    },
+    {
+      "case": "S03",
+      "median_total_ns": {
+        "full-proof": 224800,
+        "modular-with-exact-fallback": 306300,
+        "ordinary-direct": 96700
+      },
+      "modular_full_byte_ratio": 1.0,
+      "modular_full_time_ratio": 1.3625444839857652,
+      "serialized_proof_bytes": {
+        "full-proof": 382,
+        "modular-with-exact-fallback": 382,
+        "ordinary-direct": 0
+      }
+    },
+    {
+      "case": "S04",
+      "median_total_ns": {
+        "full-proof": 185700,
+        "modular-with-exact-fallback": 223700,
+        "ordinary-direct": 74800
+      },
+      "modular_full_byte_ratio": 1.0,
+      "modular_full_time_ratio": 1.2046311254711901,
+      "serialized_proof_bytes": {
+        "full-proof": 279,
+        "modular-with-exact-fallback": 279,
+        "ordinary-direct": 0
+      }
+    },
+    {
+      "case": "S07",
+      "median_total_ns": {
+        "full-proof": 247400,
+        "modular-with-exact-fallback": 441800,
+        "ordinary-direct": 79700
+      },
+      "modular_full_byte_ratio": 1.091816367265469,
+      "modular_full_time_ratio": 1.7857720291026677,
+      "serialized_proof_bytes": {
+        "full-proof": 1002,
+        "modular-with-exact-fallback": 1094,
+        "ordinary-direct": 0
+      }
+    },
+    {
+      "case": "S08",
+      "median_total_ns": {
+        "full-proof": 420800,
+        "modular-with-exact-fallback": 423900,
+        "ordinary-direct": 105600
+      },
+      "modular_full_byte_ratio": 1.0,
+      "modular_full_time_ratio": 1.0073669201520912,
+      "serialized_proof_bytes": {
+        "full-proof": 1821,
+        "modular-with-exact-fallback": 1821,
+        "ordinary-direct": 0
+      }
+    },
+    {
+      "case": "S09",
+      "median_total_ns": {
+        "full-proof": 774500,
+        "modular-with-exact-fallback": 1290500,
+        "ordinary-direct": 244900
+      },
+      "modular_full_byte_ratio": 0.6951810664385515,
+      "modular_full_time_ratio": 1.6662362814719174,
+      "serialized_proof_bytes": {
+        "full-proof": 3507,
+        "modular-with-exact-fallback": 2438,
+        "ordinary-direct": 0
+      }
+    },
+    {
+      "case": "S10",
+      "median_total_ns": {
+        "full-proof": 188900,
+        "modular-with-exact-fallback": 251000,
+        "ordinary-direct": 85600
+      },
+      "modular_full_byte_ratio": 1.0,
+      "modular_full_time_ratio": 1.3287453679195342,
+      "serialized_proof_bytes": {
+        "full-proof": 332,
+        "modular-with-exact-fallback": 332,
+        "ordinary-direct": 0
+      }
+    },
+    {
+      "case": "S11",
+      "median_total_ns": {
+        "full-proof": 246500,
+        "modular-with-exact-fallback": 459500,
+        "ordinary-direct": 78100
+      },
+      "modular_full_byte_ratio": 1.0820276497695853,
+      "modular_full_time_ratio": 1.8640973630831643,
+      "serialized_proof_bytes": {
+        "full-proof": 1085,
+        "modular-with-exact-fallback": 1174,
+        "ordinary-direct": 0
+      }
+    }
+  ],
+  "cost_scope": "proof routes: input parse/validate + production incl self-check + serialize + parse proof and instance + replay; direct: parse/validate + independent classification and all-terminal semantic decision",
+  "direct_baseline_assurance": "same input/decision; search is trusted, not a search-free proof consumer",
+  "exact_fallback_positive_cases": [
+    "S08"
+  ],
+  "exclusions": [
+    "interpreter startup",
+    "disk I/O",
+    "paper compilation"
+  ],
+  "host": {
+    "platform": "win32",
+    "portable": true,
+    "posix_child_cpu_address_space_limits": false,
+    "rss_metric": "ru_maxrss KiB on Linux; PeakWorkingSetSize/1024 on Windows"
+  },
+  "modular_positive_cases": [
+    "S01",
+    "S07",
+    "S09",
+    "S11"
+  ],
+  "negative_semantic_boundary": "two terminal witness endpoints do not decide universal terminal source equivalence",
+  "optimize": 1,
+  "repetitions": 5,
+  "schema": "pvso-modular-evidence-1",
+  "scientific_scope": "nine existing owned finite Boolean cases, not native BuildIt/Nexis or production compiler deployment; repeats are timing observations not extra systems",
+  "timing_rows": 135,
+  "witness_cases": [
+    "S02",
+    "S03",
+    "S04",
+    "S10"
+  ]
+}

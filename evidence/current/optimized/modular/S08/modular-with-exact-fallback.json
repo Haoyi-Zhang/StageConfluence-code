@@ -1,0 +1,198 @@
+{
+  "claims": {
+    "all_rewrites_preserve_observation": true,
+    "globally_confluent": true,
+    "locally_confluent": true,
+    "terminating": true,
+    "unique_terminal_state": true
+  },
+  "closures": [
+    {
+      "fact": 0,
+      "final": 1,
+      "program": 0,
+      "trace": [
+        0
+      ]
+    },
+    {
+      "fact": 1,
+      "final": 1,
+      "program": 0,
+      "trace": []
+    },
+    {
+      "fact": 0,
+      "final": 0,
+      "program": 1,
+      "trace": []
+    },
+    {
+      "fact": 1,
+      "final": 1,
+      "program": 1,
+      "trace": []
+    },
+    {
+      "fact": 0,
+      "final": 0,
+      "program": 2,
+      "trace": []
+    },
+    {
+      "fact": 1,
+      "final": 1,
+      "program": 2,
+      "trace": []
+    }
+  ],
+  "edges": [
+    {
+      "direction": "forward",
+      "id": 0,
+      "kind": "analysis",
+      "name": "discover-history",
+      "rule": 0,
+      "source": 0,
+      "target": 1
+    },
+    {
+      "direction": null,
+      "id": 1,
+      "kind": "rewrite",
+      "name": "early-only",
+      "rule": 0,
+      "source": 0,
+      "target": 2
+    },
+    {
+      "direction": null,
+      "id": 2,
+      "kind": "rewrite",
+      "name": "late-only",
+      "rule": 1,
+      "source": 1,
+      "target": 3
+    },
+    {
+      "direction": null,
+      "id": 3,
+      "kind": "rewrite",
+      "name": "close-early-path",
+      "rule": 2,
+      "source": 2,
+      "target": 3
+    }
+  ],
+  "initial_state": 0,
+  "instance": "S08-confluent-outside-modular-fragment",
+  "peaks": [
+    {
+      "join": 3,
+      "kind": "analysis/rewrite",
+      "left_edge": 0,
+      "left_path": [
+        2
+      ],
+      "right_edge": 1,
+      "right_path": [
+        3
+      ],
+      "state": 0
+    }
+  ],
+  "remaining_heights": [
+    1,
+    0
+  ],
+  "schema": "pvso-confluence-certificate-1",
+  "semantics": {
+    "all_programs_source_equivalent": true,
+    "all_rewrites_preserve_observation": true,
+    "program_truth_tables": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        1
+      ]
+    ],
+    "rewrites": [
+      {
+        "name": "early-only",
+        "preserves": true,
+        "rule": 0,
+        "source": "p0",
+        "target": "p1"
+      },
+      {
+        "name": "late-only",
+        "preserves": true,
+        "rule": 1,
+        "source": "p0",
+        "target": "p2"
+      },
+      {
+        "name": "close-early-path",
+        "preserves": true,
+        "rule": 2,
+        "source": "p1",
+        "target": "p2"
+      }
+    ],
+    "source_truth_table": [
+      0,
+      1
+    ]
+  },
+  "states": [
+    {
+      "fact": 0,
+      "id": 0,
+      "measure": 5,
+      "outgoing": [
+        0,
+        1
+      ],
+      "parent_edge": null,
+      "program": 0
+    },
+    {
+      "fact": 1,
+      "id": 1,
+      "measure": 4,
+      "outgoing": [
+        2
+      ],
+      "parent_edge": 0,
+      "program": 0
+    },
+    {
+      "fact": 1,
+      "id": 2,
+      "measure": 2,
+      "outgoing": [
+        3
+      ],
+      "parent_edge": 1,
+      "program": 1
+    },
+    {
+      "fact": 1,
+      "id": 3,
+      "measure": 0,
+      "outgoing": [],
+      "parent_edge": 2,
+      "program": 2
+    }
+  ],
+  "terminals": [
+    3
+  ]
+}

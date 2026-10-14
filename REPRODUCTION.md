@@ -9,7 +9,9 @@ Required:
 - no third-party Python packages;
 - enough writable space for about 10 MiB of outputs.
 
-The full driver is single-worker and starts at most one child process at a time. It refuses to start without POSIX resource limits. Individual model, classifier, evidence-generation helpers and unit tests remain importable on other standard-library Python platforms; that does not make the full POSIX driver portable.
+The driver starts at most one child at a time. Default execution refuses to
+start without POSIX limits; the explicit Windows portable option runs the same
+scientific plan while recording that those caps are unavailable.
 
 ## Tests
 
@@ -17,7 +19,9 @@ The full driver is single-worker and starts at most one child process at a time.
 python -m unittest discover -s tests -v
 ```
 
-Expected: 81 tests, zero failures and zero errors.
+Expected: 96 tests, zero failures and zero errors. The six-method standalone
+suite is `python -B tests/state_admission_regression.py`. Run both under `-O`
+as well; these are mode checks, not additional scientific systems.
 
 ## Named staged evidence
 
@@ -37,22 +41,40 @@ python staged_check.py verify-witness staged_cases/S02.json /tmp/S02-witness.jso
 ```sh
 # Choose a new directory; do not delete an existing result tree.
 sh reproduce.sh /tmp/prophecy-results
-python compare_results.py results /tmp/prophecy-results
+python compare_results.py evidence/current/normal /tmp/prophecy-results
 ```
 
-An external execution wrapper may terminate a long command even though every child is below its individual limit. The driver is intentionally resumable. Rerun the exact same `sh reproduce.sh /tmp/prophecy-results` command until it exits successfully. A step is skipped only when every declared JSON/CSV sentinel parses and an atomically written completion record names that exact sentinel set; a nonempty partial file alone is never sufficient. `python reproduce.py /tmp/prophecy-results --force` discards prior completion records and reruns every component.
+Rerun the same command after interruption. A step is skipped only when its
+current source/input, command/interpreter/scope and output-byte bindings agree,
+and every declared sentinel parses. `--force` ignores completion records.
 
 Expected deterministic comparison:
 
 ```json
 {
-  "deterministic_files_compared": 94,
+  "deterministic_files_compared": 132,
   "equal": true,
   "resources_compared": false
 }
 ```
 
-The 94-file set includes exact inputs, legacy chunks and totals, primary staged family rows, seven isolated parts plus the aggregate of the separate classifier, named analyses, certificates, witnesses, mutation rows, semantic pairs and the full test-name summary. CPU, wall-time and peak-RSS fields are excluded.
+The historical 94-file set includes exact inputs, legacy chunks and totals, primary staged family rows, seven isolated parts plus the aggregate of the separate classifier, named analyses, certificates, witnesses, mutation rows, semantic pairs and the then-current test-name summary. CPU, wall-time and peak-RSS fields are excluded.
+
+The current set has 132 deterministic files, adding ordered admission and
+saturated/full proof comparisons to the original selection. Timing ratios,
+host metadata and interpreter mode are excluded from equality but retained as
+raw measurements; decisions and serialized proof sizes are compared. Original
+94-file historical results are not silently relabeled current.
+
+On Windows use `python -B reproduce.py OUTPUT --portable`. All 24 stages run,
+but POSIX CPU/address-space limits and cumulative child accounting are absent;
+the driver records nulls and retains the 240-second child wall timeout. It does
+not emulate Linux or execute a native compiler integration.
+
+Recovery binds source/input bytes, exact argv, Python version/mode, execution
+scope and every stage-produced file, not just parseable sentinels. Current
+raw runs are under `evidence/current/normal` and `evidence/current/optimized`.
+The original test-name summary and historical result files remain untouched.
 
 ## Principal retained totals
 
@@ -69,7 +91,7 @@ unique terminal program       235741
 program-only                   28672
 mutations rejected             72 / 72
 separate field comparisons   4065624 / 4065624
-unit tests                     81 / 81
+unit tests (current)           96 / 96
 legacy one-slot instances     2560900
 legacy formula mismatches      0
 Boolean expression pairs       3136
@@ -83,7 +105,10 @@ sh reproduce.sh /tmp/prophecy-run-b
 python compare_results.py /tmp/prophecy-run-a /tmp/prophecy-run-b
 ```
 
-The retained `results/reproduction/comparison.json` records the historical equality of two independently populated directories before the seven additional regressions. It is not a fresh run of the current suite. The current test-name summary is updated separately; a new complete POSIX driver run is needed to re-establish full 94-file equality for the current tree.
+The original `results/reproduction/comparison.json` and 81-test summary remain
+historical. Current local normal/optimized runs compare equal on 132 files;
+93 original non-test scientific files also compare equal. A current Linux run
+is still required for the unchanged POSIX limit mechanism on this version.
 
 ## Automated finite checks
 

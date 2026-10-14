@@ -14,6 +14,7 @@ import time
 from src.model import named_lattice, monotone_inflationary_maps
 from src.checker import (fact_reachability, least_common_fixed_point,
                          terminal_oracle, synthesize_guards)
+from src.runtime_support import legacy_limits, peak_rss_kib
 
 FIELDS = ["lattice", "first_map", "second_map", "cases", "incomplete_cases",
           "complete_unique_cases", "complete_multiple_cases", "formula_mismatches",
@@ -71,18 +72,11 @@ def check_pair(lat, maps, first, second):
 
 
 def resource_limits():
-    import resource
-
-    # One process, one logical CPU. No children and no network operations.
-    if hasattr(os, "sched_getaffinity"):
-        os.sched_setaffinity(0, {min(os.sched_getaffinity(0))})
-    resource.setrlimit(resource.RLIMIT_AS, (3 * 1024**3, 3 * 1024**3))
-    resource.setrlimit(resource.RLIMIT_CPU, (180, 185))
+    legacy_limits()
 
 
 def run_chunk(name, start, stop, out):
     resource_limits()
-    import resource
 
     wall, cpu = time.perf_counter(), time.process_time()
     lat = named_lattice(name)
@@ -106,7 +100,7 @@ def run_chunk(name, start, stop, out):
                "cases": sum(r["cases"] for r in rows),
                "wall_seconds": time.perf_counter() - wall,
                "cpu_seconds": time.process_time() - cpu,
-               "peak_rss_kib": resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
+               "peak_rss_kib": peak_rss_kib(),
                "workers": 1, "children": 0, "timeouts": 0,
                "selection": "all ordered map pairs in the specified outer-index range; all binary emitters and guards",
                "seeds": None}

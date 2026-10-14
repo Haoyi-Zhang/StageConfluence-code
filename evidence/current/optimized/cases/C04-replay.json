@@ -1,0 +1,10 @@
+{
+  "kind": "wrong_semantics",
+  "terminal_states": [
+    {
+      "artifact": "[\"not\",[\"var\",0]]",
+      "fact": 1
+    }
+  ],
+  "valid": true
+}

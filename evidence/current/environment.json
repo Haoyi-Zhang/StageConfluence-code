@@ -1,0 +1,13 @@
+{
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "executable": "<python>",
+  "platform": "Windows-11-10.0.28000-SP0",
+  "machine": "AMD64",
+  "processor": "Intel64 Family 6 Model 151 Stepping 2, GenuineIntel",
+  "cpu": "12th Gen Intel(R) Core(TM) i7-12700KF",
+  "physical_cores": 12,
+  "logical_processors": 20,
+  "cpu_source": "local Win32_Processor CIM query",
+  "runtime_dependencies": "Python standard library; no third-party scientific runtime",
+  "native_compiler_embedding": "not supplied; no BuildIt/Nexis source/trace adapter executed"
+}

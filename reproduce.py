@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -21,6 +22,7 @@ import sys
 import tempfile
 import time
 from typing import Sequence
+from src.runtime_support import scope
 
 try:
     import resource
@@ -43,7 +45,7 @@ INDEPENDENT_FAMILIES = (
     "D-B2-two-analysis",
 )
 
-MARKER_SCHEMA = "pvso-reproduction-step-1"
+MARKER_SCHEMA = "pvso-reproduction-step-2"
 MARKER_DIRECTORY = ".reproduction-complete"
 
 
@@ -112,11 +114,32 @@ def relative_sentinels(output: Path, sentinels: Sequence[Path]) -> list[str]:
     return [str(path.resolve().relative_to(output.resolve())) for path in sentinels]
 
 
+def source_inventory() -> dict[str, str]:
+    """Bind local code and declared inputs, excluding historical/generated data."""
+    paths = list(ROOT.glob('*.py'))
+    for folder, pattern in (('src', '*.py'), ('tests', '*.py'),
+                            ('cases', '*.json'), ('staged_cases', '*.json')):
+        paths.extend((ROOT / folder).rglob(pattern))
+    return {p.relative_to(ROOT).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
+            for p in sorted(set(paths)) if p.is_file()}
+
+
+def output_inventory(output: Path, paths: Sequence[Path]) -> dict[str, str]:
+    return {p.resolve().relative_to(output.resolve()).as_posix():
+            hashlib.sha256(p.read_bytes()).hexdigest() for p in paths}
+
+
+def output_stamps(output: Path) -> dict[Path, tuple[int, int]]:
+    return {p: (p.stat().st_mtime_ns, p.stat().st_size) for p in output.rglob('*')
+            if p.is_file() and MARKER_DIRECTORY not in p.relative_to(output).parts}
+
+
 def step_complete(
     output: Path,
     label: str,
     sentinels: Sequence[Path],
     marker_directory: Path,
+    argv: Sequence[str] | None = None,
 ) -> bool:
     marker = marker_path(marker_directory, label)
     if not marker.is_file() or not valid_outputs(sentinels):
@@ -125,11 +148,23 @@ def step_complete(
         value = json.loads(marker.read_text(encoding="utf-8"))
     except (OSError, UnicodeError, json.JSONDecodeError):
         return False
-    return value == {
-        "schema": MARKER_SCHEMA,
-        "label": label,
-        "sentinels": relative_sentinels(output, sentinels),
-    }
+    if not isinstance(value, dict) or value.get('schema') != MARKER_SCHEMA:
+        return False
+    if value.get('label') != label or value.get('sentinels') != relative_sentinels(output, sentinels):
+        return False
+    if (value.get('source') != source_inventory() or value.get('optimize') != sys.flags.optimize
+            or value.get('execution_scope') != scope()):
+        return False
+    if value.get('python') != [sys.executable, sys.version] or (argv is not None and value.get('argv') != list(argv)):
+        return False
+    saved = value.get('outputs')
+    if not isinstance(saved, dict) or not saved:
+        return False
+    # Untrusted marker paths must stay inside this result root.
+    paths = [output / name for name in saved]
+    if any(not p.resolve().is_relative_to(output.resolve()) or not p.is_file() for p in paths):
+        return False
+    return saved == output_inventory(output, paths)
 
 
 def mark_complete(
@@ -137,6 +172,8 @@ def mark_complete(
     label: str,
     sentinels: Sequence[Path],
     marker_directory: Path,
+    argv: Sequence[str] | None = None,
+    outputs: Sequence[Path] | None = None,
 ) -> None:
     if not valid_outputs(sentinels):
         raise RuntimeError(f"cannot mark invalid reproduction outputs complete: {label}")
@@ -144,6 +181,12 @@ def mark_complete(
         "schema": MARKER_SCHEMA,
         "label": label,
         "sentinels": relative_sentinels(output, sentinels),
+        "source": source_inventory(),
+        "python": [sys.executable, sys.version],
+        "optimize": sys.flags.optimize,
+        "execution_scope": scope(),
+        "argv": None if argv is None else list(argv),
+        "outputs": output_inventory(output, sorted(set(sentinels) | set(outputs or []))),
     })
 
 
@@ -156,22 +199,29 @@ def run(
     records: list[dict[str, object]],
 ) -> None:
     marker = marker_path(marker_directory, label)
-    if step_complete(output, label, sentinels, marker_directory):
+    if step_complete(output, label, sentinels, marker_directory, argv):
         records.append({"label": label, "skipped_completed": True, "returncode": 0})
         return
     marker.unlink(missing_ok=True)
+    before_outputs = output_stamps(output)
     started_wall = time.perf_counter()
     before = resource.getrusage(resource.RUSAGE_CHILDREN) if resource is not None else None
     env = os.environ.copy()
     env.update({"PYTHONHASHSEED": "0", "PYTHONDONTWRITEBYTECODE": "1"})
-    completed = subprocess.run(
-        list(argv), cwd=ROOT, env=env, check=False,
-        preexec_fn=child_limits if os.name == "posix" and resource is not None else None,
-        timeout=240,
-    )
+    logs = output/'command-logs'
+    logs.mkdir(parents=True, exist_ok=True)
+    with (logs/f'{label}.stdout.txt').open('w', encoding='utf-8') as stdout, \
+         (logs/f'{label}.stderr.txt').open('w', encoding='utf-8') as stderr:
+        completed = subprocess.run(
+            list(argv), cwd=ROOT, env=env, check=False, stdout=stdout, stderr=stderr,
+            preexec_fn=child_limits if os.name == "posix" and resource is not None else None,
+            timeout=240,
+        )
     after = resource.getrusage(resource.RUSAGE_CHILDREN) if resource is not None else None
     record = {
         "label": label,
+        "argv": list(argv),
+        "cwd": str(ROOT),
         "skipped_completed": False,
         "returncode": completed.returncode,
         "wall_seconds": time.perf_counter() - started_wall,
@@ -183,7 +233,8 @@ def run(
         raise RuntimeError(f"reproduction step failed ({label}): return code {completed.returncode}")
     if not valid_outputs(sentinels):
         raise RuntimeError(f"reproduction step did not create valid completion sentinels: {label}")
-    mark_complete(output, label, sentinels, marker_directory)
+    changed = [p for p, stamp in output_stamps(output).items() if before_outputs.get(p) != stamp]
+    mark_complete(output, label, sentinels, marker_directory, argv, changed)
 
 
 def component_cpu(output: Path) -> float:
@@ -204,19 +255,26 @@ def component_cpu(output: Path) -> float:
     if path.is_file():
         value = json.loads(path.read_text())
         total += float(value.get("cumulative_cpu_seconds", value.get("cpu_seconds", 0.0)))
+    for path in (output/'admission-resources.json', output/'modular'/'resources.json'):
+        if path.is_file():
+            total += float(json.loads(path.read_text()).get('cpu_seconds', 0.0))
     return total
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("output", type=Path)
+    parser.add_argument('--portable', action='store_true',
+        help='explicitly run the same scientific plan without unavailable POSIX CPU/AS caps')
     parser.add_argument(
         "--force", action="store_true",
         help="ignore prior step-completion records and rerun every component",
     )
     args = parser.parse_args()
-    if os.name != "posix" or resource is None:
+    if (os.name != "posix" or resource is None) and not args.portable:
         raise RuntimeError("full reproduction requires POSIX resource limits; portable checks remain available")
+    if args.portable:
+        os.environ['STAGECONFLUENCE_PORTABLE'] = '1'
     output = args.output.resolve()
     output.mkdir(parents=True, exist_ok=True)
     marker_directory = output / MARKER_DIRECTORY
@@ -225,16 +283,20 @@ def main() -> None:
     marker_directory.mkdir(parents=True, exist_ok=True)
 
     python = sys.executable
+    python_flags = ['-B'] + (['-O'] * sys.flags.optimize)
+    def command(*args):
+        return [python, *python_flags, *args]
     records: list[dict[str, object]] = []
     wall_started = time.perf_counter()
     parent_cpu_started = time.process_time()
-    child_before = resource.getrusage(resource.RUSAGE_CHILDREN)
+    child_before = resource.getrusage(resource.RUSAGE_CHILDREN) if resource is not None else None
+    consumed = source_inventory()
 
     # Legacy inputs, named controls, semantic catalog, and complete test suite.
     run(
         output,
         "legacy-evidence-and-tests",
-        [python, "collect.py", "evidence", "--out", str(output)],
+        command("collect.py", "evidence", "--out", str(output)),
         [output / "evidence-resources.json", output / "test-summary.json",
          output / "semantic-summary.json", output / "inputs" / "expressions.json"],
         marker_directory,
@@ -245,8 +307,8 @@ def main() -> None:
         run(
             output,
             f"legacy-enumeration-{lattice}-{first}-{stop}",
-            [python, "exhaustive.py", "--lattice", lattice, "--start", str(first),
-             "--stop", str(stop), "--out", str(output / "enumeration")],
+            command("exhaustive.py", "--lattice", lattice, "--start", str(first),
+             "--stop", str(stop), "--out", str(output / "enumeration")),
             [output / "enumeration" / f"{stem}.csv", output / "enumeration" / f"{stem}.json"],
             marker_directory,
             records,
@@ -254,7 +316,7 @@ def main() -> None:
     run(
         output,
         "legacy-summarize",
-        [python, "collect.py", "summarize", "--out", str(output)],
+        command("collect.py", "summarize", "--out", str(output)),
         [output / "summarize-resources.json", output / "enumeration-total.json",
          output / "enumeration-summary.csv"],
         marker_directory,
@@ -266,7 +328,7 @@ def main() -> None:
     run(
         output,
         "staged-enumeration",
-        [python, "staged_campaign.py", "--out", str(staged)],
+        command("staged_campaign.py", "--out", str(staged)),
         [staged / "staged-enumeration-summary.json", staged / "staged-enumeration-families.csv",
          staged / "staged-enumeration-examples.json"],
         marker_directory,
@@ -278,7 +340,7 @@ def main() -> None:
         run(
             output,
             f"staged-independent-audit-{family}",
-            [python, "independent_audit.py", "--out", str(part), "--family", family],
+            command("independent_audit.py", "--out", str(part), "--family", family),
             [part / "independent-audit-summary.json",
              part / "independent-audit-families.csv",
              part / "independent-audit-resources.json"],
@@ -288,8 +350,8 @@ def main() -> None:
     run(
         output,
         "staged-independent-audit-aggregate",
-        [python, "aggregate_independent_audit.py", "--parts", str(audit_parts),
-         "--out", str(staged)],
+        command("aggregate_independent_audit.py", "--parts", str(audit_parts),
+         "--out", str(staged)),
         [staged / "independent-audit-summary.json",
          staged / "independent-audit-families.csv",
          staged / "independent-audit-resources.json"],
@@ -299,36 +361,47 @@ def main() -> None:
     run(
         output,
         "staged-case-evidence",
-        [python, "staged_evidence.py", "--cases", str(ROOT / "staged_cases"), "--out", str(staged)],
+        command("staged_evidence.py", "--cases", str(ROOT / "staged_cases"), "--out", str(staged)),
         [staged / "case-summary.json", staged / "mutation-summary.json",
          staged / "staged-evidence-resources.json"],
         marker_directory,
         records,
     )
 
-    child_after = resource.getrusage(resource.RUSAGE_CHILDREN)
+    # The standalone admission suite is part of the default plan, not private-only.
+    admission = output/'admission-summary.json'
+    run(output, 'ordered-state-admission', command('tests/state_admission_regression.py', '--out', str(admission)),
+        [admission], marker_directory, records)
+    modular = output/'modular'
+    run(output, 'modular-evidence-and-cost', command('modular_evidence.py', '--out', str(modular)),
+        [modular/'summary.json', modular/'cost.csv'], marker_directory, records)
+    if consumed != source_inventory():
+        raise RuntimeError('scientific source/input inventory changed during reproduction')
+    child_after = resource.getrusage(resource.RUSAGE_CHILDREN) if resource is not None else None
     write_json(output / "driver-resources.json", {
         "completed": True,
         "resumable": True,
         "wall_seconds_this_invocation": time.perf_counter() - wall_started,
         "parent_cpu_seconds_this_invocation": time.process_time() - parent_cpu_started,
-        "child_user_cpu_seconds_this_invocation": child_after.ru_utime - child_before.ru_utime,
-        "child_system_cpu_seconds_this_invocation": child_after.ru_stime - child_before.ru_stime,
+        "child_user_cpu_seconds_this_invocation": child_after.ru_utime - child_before.ru_utime if child_after is not None else None,
+        "child_system_cpu_seconds_this_invocation": child_after.ru_stime - child_before.ru_stime if child_after is not None else None,
         "scientific_component_cpu_seconds": component_cpu(output),
-        "maximum_child_peak_rss_kib_this_invocation": child_after.ru_maxrss,
+        "maximum_child_peak_rss_kib_this_invocation": child_after.ru_maxrss if child_after is not None else None,
         "workers": 1,
         "maximum_concurrent_children": 1,
         "steps_in_plan": len(records),
         "steps_skipped_from_prior_completed_output": sum(bool(r.get("skipped_completed")) for r in records),
         "legacy_chunks": len(CHUNKS),
         "staged_families": 7,
-        "child_cpu_limit_seconds": 180,
-        "child_address_space_limit_bytes": 3 * 1024**3,
+        "child_cpu_limit_seconds": 180 if resource is not None else None,
+        "child_address_space_limit_bytes": 3 * 1024**3 if resource is not None else None,
+        "host_execution_scope": scope(),
+        "consumed_source_and_input_sha256": consumed,
         "steps": records,
         "note": (
             "Sequential process isolation prevents cross-campaign allocator/GC interference. "
-            "A step is skipped only when its parseable sentinels and atomically written completion "
-            "record agree; a partial nonempty file is never a completion signal. Timings are informative; "
+            "A step is skipped only when current source/inputs, command, Python mode and output bytes "
+            "match its completion record. Hashes bind recovery, not authorship or peer approval. Timings are informative; "
             "deterministic scientific files are compared separately."
         ),
     })

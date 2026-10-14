@@ -1,0 +1,144 @@
+{
+  "case": "S11",
+  "expected": {
+    "confluent": true,
+    "terminal_programs_source_equivalent": true
+  },
+  "input": {
+    "fact_labels": [
+      "closed"
+    ],
+    "initial_fact": 0,
+    "initial_program": "p0",
+    "inputs": 1,
+    "lattice": {
+      "kind": "chain",
+      "size": 1
+    },
+    "name": "S11-unreachable-bad-rewrite",
+    "programs": [
+      {
+        "analyses": [
+          {
+            "direction": "forward",
+            "name": "id",
+            "table": [
+              0
+            ]
+          }
+        ],
+        "expression": [
+          "var",
+          0
+        ],
+        "name": "p0",
+        "rank": 1
+      },
+      {
+        "analyses": [
+          {
+            "direction": "prophecy",
+            "name": "id",
+            "table": [
+              0
+            ]
+          }
+        ],
+        "expression": [
+          "var",
+          0
+        ],
+        "name": "p1",
+        "rank": 0
+      },
+      {
+        "analyses": [
+          {
+            "direction": "forward",
+            "name": "id",
+            "table": [
+              0
+            ]
+          }
+        ],
+        "expression": [
+          "var",
+          0
+        ],
+        "name": "dead0",
+        "rank": 1
+      },
+      {
+        "analyses": [
+          {
+            "direction": "prophecy",
+            "name": "id",
+            "table": [
+              0
+            ]
+          }
+        ],
+        "expression": [
+          "not",
+          [
+            "var",
+            0
+          ]
+        ],
+        "name": "dead1",
+        "rank": 0
+      }
+    ],
+    "rewrites": [
+      {
+        "guard": [
+          true
+        ],
+        "name": "live",
+        "source": "p0",
+        "target": "p1",
+        "transfer": [
+          0
+        ]
+      },
+      {
+        "guard": [
+          true
+        ],
+        "name": "dead-bad",
+        "source": "dead0",
+        "target": "dead1",
+        "transfer": [
+          0
+        ]
+      }
+    ],
+    "source_expression": [
+      "var",
+      0
+    ]
+  },
+  "routes": {
+    "full-proof": {
+      "kind": "full",
+      "outcome": {
+        "confluent": true,
+        "terminal_programs_source_equivalent": true
+      }
+    },
+    "modular-with-exact-fallback": {
+      "kind": "modular",
+      "outcome": {
+        "confluent": true,
+        "terminal_programs_source_equivalent": true
+      }
+    },
+    "ordinary-direct": {
+      "kind": "direct-decision",
+      "outcome": {
+        "confluent": true,
+        "terminal_programs_source_equivalent": true
+      }
+    }
+  }
+}

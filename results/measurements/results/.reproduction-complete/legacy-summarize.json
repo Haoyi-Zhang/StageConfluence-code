@@ -1,0 +1,9 @@
+{
+  "label": "legacy-summarize",
+  "schema": "pvso-reproduction-step-1",
+  "sentinels": [
+    "summarize-resources.json",
+    "enumeration-total.json",
+    "enumeration-summary.csv"
+  ]
+}

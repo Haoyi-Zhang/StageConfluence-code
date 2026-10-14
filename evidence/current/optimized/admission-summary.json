@@ -1,0 +1,14 @@
+{
+  "finite_counts": {
+    "admission_probes": 427,
+    "equality_and_isolation_groups": 1,
+    "literal_domains": 15,
+    "negative_mutations": 68,
+    "negative_witnesses": 4,
+    "positive_certificates": 11,
+    "positive_mutations": 271,
+    "search_free_groups": 1
+  },
+  "successful": true,
+  "tests": 6
+}

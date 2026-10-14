@@ -1,0 +1,27 @@
+{
+  "instance": "S04-guard-persistence-failure",
+  "left": [
+    {
+      "direction": "forward",
+      "kind": "analysis",
+      "name": "discover-history",
+      "rule": 0
+    }
+  ],
+  "left_terminal": [
+    0,
+    1
+  ],
+  "right": [
+    {
+      "kind": "rewrite",
+      "name": "ephemeral-commit",
+      "rule": 0
+    }
+  ],
+  "right_terminal": [
+    1,
+    1
+  ],
+  "schema": "pvso-nonconfluence-witness-1"
+}

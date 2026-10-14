@@ -1,0 +1,10 @@
+{
+  "label": "legacy-evidence-and-tests",
+  "schema": "pvso-reproduction-step-1",
+  "sentinels": [
+    "evidence-resources.json",
+    "test-summary.json",
+    "semantic-summary.json",
+    "inputs/expressions.json"
+  ]
+}

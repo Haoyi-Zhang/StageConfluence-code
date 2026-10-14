@@ -1,0 +1,1 @@
+{"accepted": 0, "basis": "single-field mutations of S01 certificate and all retained negative witnesses", "cases": 9, "mutations": 72, "rejected": 72, "schema": "pvso-mutation-campaign-1"}

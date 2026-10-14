@@ -1,0 +1,14 @@
+{
+  "kind": "different_syntax",
+  "terminal_states": [
+    {
+      "artifact": "[\"xor\",[\"var\",0],[\"const\",0]]",
+      "fact": 7
+    },
+    {
+      "artifact": "[\"var\",0]",
+      "fact": 7
+    }
+  ],
+  "valid": true
+}

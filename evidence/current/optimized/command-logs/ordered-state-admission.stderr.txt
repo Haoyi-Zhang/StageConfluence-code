@@ -1,0 +1,11 @@
+test_exhaustive_words_malformed_precedence_and_cap (__main__.AdmissionRegression.test_exhaustive_words_malformed_precedence_and_cap) ... ok
+test_existing_equality_admission_and_call_isolation (__main__.AdmissionRegression.test_existing_equality_admission_and_call_isolation) ... ok
+test_literal_finite_domains_and_evidence (__main__.AdmissionRegression.test_literal_finite_domains_and_evidence) ... ok
+test_negative_witness_mutations_and_trace_cap (__main__.AdmissionRegression.test_negative_witness_mutations_and_trace_cap) ... ok
+test_positive_certificate_mutations (__main__.AdmissionRegression.test_positive_certificate_mutations) ... ok
+test_verifier_remains_search_free (__main__.AdmissionRegression.test_verifier_remains_search_free) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 1.884s
+
+OK

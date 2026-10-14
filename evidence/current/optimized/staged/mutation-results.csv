@@ -1,0 +1,73 @@
+mutation,rejected,diagnostic
+certificate/instance,True,instance name mismatch
+certificate/remaining-height,True,remaining-height mismatch
+state/0/measure,True,state measure mismatch
+state/1/measure,True,state measure mismatch
+state/2/measure,True,state measure mismatch
+state/3/measure,True,state measure mismatch
+state/4/measure,True,state measure mismatch
+state/5/measure,True,state measure mismatch
+state/6/measure,True,state measure mismatch
+state/7/measure,True,state measure mismatch
+state/8/measure,True,state measure mismatch
+edge/0/target,True,edge target mismatch
+edge/1/target,True,edge target mismatch
+edge/2/target,True,edge target mismatch
+edge/3/target,True,edge target mismatch
+edge/4/target,True,edge target mismatch
+edge/5/target,True,edge target mismatch
+edge/6/target,True,edge target mismatch
+edge/7/target,True,edge target mismatch
+edge/8/target,True,edge target mismatch
+edge/9/target,True,edge target mismatch
+edge/10/target,True,edge target mismatch
+edge/11/target,True,edge target mismatch
+state/0/outgoing-coverage,True,outgoing transition set mismatch
+state/1/outgoing-coverage,True,outgoing transition set mismatch
+state/1/parent,True,missing parent witness
+state/2/outgoing-coverage,True,outgoing transition set mismatch
+state/2/parent,True,missing parent witness
+state/3/outgoing-coverage,True,outgoing transition set mismatch
+state/3/parent,True,missing parent witness
+state/4/outgoing-coverage,True,outgoing transition set mismatch
+state/4/parent,True,missing parent witness
+state/5/outgoing-coverage,True,outgoing transition set mismatch
+state/5/parent,True,missing parent witness
+state/6/outgoing-coverage,True,outgoing transition set mismatch
+state/6/parent,True,missing parent witness
+state/7/outgoing-coverage,True,outgoing transition set mismatch
+state/7/parent,True,missing parent witness
+state/8/parent,True,missing parent witness
+closure/0/final,True,closure final mismatch
+closure/1/final,True,closure final mismatch
+closure/2/final,True,closure final mismatch
+closure/3/final,True,closure final mismatch
+closure/4/final,True,closure final mismatch
+closure/5/final,True,closure final mismatch
+closure/6/final,True,closure final mismatch
+closure/7/final,True,closure final mismatch
+closure/8/final,True,closure final mismatch
+closure/9/final,True,closure final mismatch
+closure/10/final,True,closure final mismatch
+closure/11/final,True,closure final mismatch
+closure/12/final,True,closure final mismatch
+closure/13/final,True,closure final mismatch
+closure/14/final,True,closure final mismatch
+closure/15/final,True,closure final mismatch
+peak/0/join,True,join path ends at the wrong state
+peak/1/join,True,join path ends at the wrong state
+peak/2/join,True,join path ends at the wrong state
+peak/3/join,True,join path ends at the wrong state
+semantics/program/0/bit0,True,semantic table mismatch
+semantics/program/1/bit0,True,semantic table mismatch
+semantics/program/2/bit0,True,semantic table mismatch
+semantics/program/3/bit0,True,semantic table mismatch
+claims/global-confluence,True,claim summary mismatch
+witness/S02/terminal,True,left terminal mismatch
+witness/S02/event,True,analysis event is not enabled
+witness/S03/terminal,True,left terminal mismatch
+witness/S03/event,True,rewrite event is not enabled
+witness/S04/terminal,True,left terminal mismatch
+witness/S04/event,True,analysis event is not enabled
+witness/S10/terminal,True,left terminal mismatch
+witness/S10/event,True,rewrite event is not enabled

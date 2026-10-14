@@ -22,13 +22,43 @@ Retained deterministic outputs under `results/` report:
 - 235,741 systems with a unique terminal catalog program ID, including 28,672 ID-only/non-state-confluent cases;
 - five replayed positive certificates, four replayed negative witnesses and 72/72 rejected single-field mutations;
 - zero disagreement in 4,065,624 field comparisons by a separately implemented classifier;
-- 81 passing unit tests (74 original tests plus seven scientific-contract regressions);
+- the historical 81-test inventory (current execution scope below);
 - 2,560,900 one-slot control instances with zero exact-formula mismatch; and
 - 3,136 ordered Boolean-expression pairs, including 476 different-syntax/equal-semantics pairs.
 
 These counts are exhaustive only for the explicitly declared finite catalogs. They are not evidence about all finite lattices or production compiler workloads. The seven-family generator holds every expression at `var(0)`, so program-ID counts do not measure syntax divergence. The `unique_program` and `unique_terminal_program` fields compare catalog identifiers, not expression trees.
 
 Within each full-campaign classifier, the direct and local-peak predicates reuse one normal-form table; the latter intersects successor normal-form sets. Named-case analysis and certificates use explicit descendant/join paths. The separate nine-field audit checks another implementation, but is not a comparison of independent descendant searches with terminal propagation.
+
+## Current evidence and proof transport
+
+`evidence/current/` retains two fresh complete 24-stage runs on the actual
+Windows/Python host: 96 unit tests and the six-method ordered-admission suite
+pass in normal and optimized modes. The original campaigns are rerun without
+enlarging their selections. The two modes agree on 132 deterministic files;
+93 historical non-test scientific files also agree. All original result files,
+including the earlier 81-test summary, remain unchanged.
+
+The saturated certificate consumer replays every original program/fact closure
+trace, global GP and enabled-fact CC, then the exact saturated graph using the
+existing graph-replay kernel. It does not trust optional partial obligations.
+Terminal-set correspondence transfers its guarantee to the full relation.
+S08 remains exactly provable outside the modular premises; S07 remains
+confluent but semantically wrong.
+
+The same nine named inputs compare ordinary direct classification, full proof
+production/replay and modular production with exact fallback. Direct search
+gets the same information but has a different trusted path. The proof routes
+have the same acceptance guarantee and count parsing, production/self-check,
+serialization, reparsing and replay. The modular route is slower on every
+case in both modes. S01/S09 proofs are smaller; S07/S11 proofs grow. No native
+BuildIt/Nexis execution or compiler speedup is claimed.
+
+```sh
+python -B staged_check.py certify-modular staged_cases/S01.json --out /tmp/S01-modular.json
+python -B staged_check.py verify-modular staged_cases/S01.json /tmp/S01-modular.json
+python -B modular_evidence.py --out /tmp/staged-proof-cost
+```
 
 ## Fast checks
 
@@ -68,17 +98,20 @@ not rerun or alter any saved campaign results. It contains no timing work.
 Use a new output directory:
 
 ```sh
-sh reproduce.sh /tmp/prophecy-results
-python compare_results.py results /tmp/prophecy-results
+python -B reproduce.py /tmp/prophecy-results
+python -B compare_results.py evidence/current/normal /tmp/prophecy-results
 ```
 
-The driver launches a fixed sequence of bounded children, never more than one at once. Each child receives a 3 GiB address-space limit and a 180-second CPU limit. The output directory is resumable: rerun the same command after interruption. A step is skipped only when every declared JSON/CSV sentinel parses and an atomically written completion record names that exact set. A partial nonempty file is not a completion signal; use `python reproduce.py OUTPUT --force` to rerun every component.
+The default Linux driver launches one child at a time with a 3 GiB
+address-space cap, 180-second CPU cap and 240-second wall timeout. Resume using
+the same command; the byte-bound completion checks described below apply.
+Use `python reproduce.py OUTPUT --force` to rerun every component.
 
 Expected comparison:
 
 ```json
 {
-  "deterministic_files_compared": 94,
+  "deterministic_files_compared": 132,
   "equal": true,
   "resources_compared": false
 }
@@ -86,9 +119,21 @@ Expected comparison:
 
 Resource records are excluded from equality because host timing and peak RSS are observations, not deterministic evidence.
 
-The retained reproduction comparison predates the seven added regressions; the 94-file expectation is a check to run on the current tree, not a fresh remote result. The current suite passed locally on Windows with Python 3.12.14. Full POSIX driver reproduction is separate.
+The original 94-file comparison is historical. The 132-file comparison is
+current local normal-versus-optimized execution, not remote CI. Fresh Linux
+resource-limited execution and source-language embedding remain separate gates.
 
-The full driver requires POSIX resource limits and gives each child an additional 240-second wall timeout. The standalone repository's `scientific-checks.yml` runs the full finite plan and comparison under a whole-run bound, retaining raw output even on failure. Workflow preparation is not evidence of a remote run.
+On Windows pass `--portable` explicitly. The same 24 scientific stages run
+sequentially with a 240-second child wall timeout, but POSIX CPU/address-space
+caps and cumulative child accounting are unavailable and recorded as null.
+Own-process CPU/wall time and Windows peak working set are measured, not
+emulated. Recovery now binds current code/input bytes, Python version/mode,
+argv, execution scope and every produced file. Changed parseable results,
+changed inputs/commands or missing proof files invalidate completion.
+
+The default resource-limited path requires POSIX. The explicit portable path
+does not. `scientific-checks.yml` prepares a full Linux plan and comparison,
+retaining raw output on failure; preparation is not evidence of a remote run.
 
 ## Repository map
 
@@ -102,7 +147,8 @@ The full driver requires POSIX resource limits and gives each child an additiona
 - `staged_evidence.py`: named evidence and mutation campaign.
 - `staged_cases/`: nine retained staged inputs plus rejected invalid inputs.
 - `src/model.py`, `src/checker.py`, `check.py`, `exhaustive.py`, `collect.py`: one-slot negative control.
-- `tests/`: 81 unit, boundary, replay, recovery and mutation tests.
+- `tests/`: 96 discovered tests plus the standalone ordered-admission suite.
+- `src/modular_certificate.py`, `modular_evidence.py`: saturated replay and same-input complete cost.
 - `proofs/`: supplied detailed mathematical arguments.
 - `results/`: retained deterministic outputs and separately labeled resource records.
 - `claim_evidence_ledger.csv`: material claims linked to proofs, code and raw evidence.

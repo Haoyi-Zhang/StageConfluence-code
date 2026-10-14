@@ -1,0 +1,240 @@
+{
+  "fact_labels": [
+    "none",
+    "H",
+    "Q",
+    "HQ"
+  ],
+  "initial_fact": 0,
+  "initial_program": "p0",
+  "inputs": 1,
+  "lattice": {
+    "bits": 2,
+    "kind": "powerset"
+  },
+  "name": "S09-confluent-diamond-with-top-transfer",
+  "programs": [
+    {
+      "analyses": [
+        {
+          "direction": "forward",
+          "name": "discover-history",
+          "table": [
+            1,
+            1,
+            3,
+            3
+          ]
+        },
+        {
+          "direction": "prophecy",
+          "name": "discover-prophecy",
+          "table": [
+            2,
+            3,
+            2,
+            3
+          ]
+        }
+      ],
+      "expression": [
+        "or",
+        [
+          "and",
+          [
+            "var",
+            0
+          ],
+          [
+            "const",
+            1
+          ]
+        ],
+        [
+          "const",
+          0
+        ]
+      ],
+      "name": "p0",
+      "rank": 2
+    },
+    {
+      "analyses": [
+        {
+          "direction": "forward",
+          "name": "keep-history",
+          "table": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "direction": "prophecy",
+          "name": "discover-prophecy",
+          "table": [
+            2,
+            3,
+            2,
+            3
+          ]
+        }
+      ],
+      "expression": [
+        "or",
+        [
+          "var",
+          0
+        ],
+        [
+          "const",
+          0
+        ]
+      ],
+      "name": "p1",
+      "rank": 1
+    },
+    {
+      "analyses": [
+        {
+          "direction": "forward",
+          "name": "discover-history",
+          "table": [
+            1,
+            1,
+            3,
+            3
+          ]
+        },
+        {
+          "direction": "prophecy",
+          "name": "keep-prophecy",
+          "table": [
+            0,
+            1,
+            2,
+            3
+          ]
+        }
+      ],
+      "expression": [
+        "and",
+        [
+          "var",
+          0
+        ],
+        [
+          "const",
+          1
+        ]
+      ],
+      "name": "p2",
+      "rank": 1
+    },
+    {
+      "analyses": [
+        {
+          "direction": "forward",
+          "name": "keep-history",
+          "table": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "direction": "prophecy",
+          "name": "keep-prophecy",
+          "table": [
+            0,
+            1,
+            2,
+            3
+          ]
+        }
+      ],
+      "expression": [
+        "var",
+        0
+      ],
+      "name": "p3",
+      "rank": 0
+    }
+  ],
+  "rewrites": [
+    {
+      "guard": [
+        false,
+        true,
+        false,
+        true
+      ],
+      "name": "simplify-and",
+      "source": "p0",
+      "target": "p1",
+      "transfer": [
+        3,
+        3,
+        3,
+        3
+      ]
+    },
+    {
+      "guard": [
+        false,
+        false,
+        true,
+        true
+      ],
+      "name": "simplify-or",
+      "source": "p0",
+      "target": "p2",
+      "transfer": [
+        3,
+        3,
+        3,
+        3
+      ]
+    },
+    {
+      "guard": [
+        false,
+        false,
+        true,
+        true
+      ],
+      "name": "finish-or",
+      "source": "p1",
+      "target": "p3",
+      "transfer": [
+        3,
+        3,
+        3,
+        3
+      ]
+    },
+    {
+      "guard": [
+        false,
+        true,
+        false,
+        true
+      ],
+      "name": "finish-and",
+      "source": "p2",
+      "target": "p3",
+      "transfer": [
+        3,
+        3,
+        3,
+        3
+      ]
+    }
+  ],
+  "source_expression": [
+    "var",
+    0
+  ]
+}

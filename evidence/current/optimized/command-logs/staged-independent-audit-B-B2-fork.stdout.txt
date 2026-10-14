@@ -1,0 +1,1 @@
+{"family": "B-B2-fork", "field_mismatches": 0, "instances_checked": 262144}

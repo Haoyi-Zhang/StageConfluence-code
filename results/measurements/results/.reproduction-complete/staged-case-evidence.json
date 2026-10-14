@@ -1,0 +1,9 @@
+{
+  "label": "staged-case-evidence",
+  "schema": "pvso-reproduction-step-1",
+  "sentinels": [
+    "staged/case-summary.json",
+    "staged/mutation-summary.json",
+    "staged/staged-evidence-resources.json"
+  ]
+}

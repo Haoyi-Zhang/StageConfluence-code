@@ -1,0 +1,55 @@
+{
+  "instance": "S02-unjoined-rewrite-peak",
+  "left": [
+    {
+      "direction": "forward",
+      "kind": "analysis",
+      "name": "discover-history",
+      "rule": 0
+    },
+    {
+      "direction": "prophecy",
+      "kind": "analysis",
+      "name": "discover-prophecy",
+      "rule": 1
+    },
+    {
+      "kind": "rewrite",
+      "name": "simplify-or",
+      "rule": 1
+    }
+  ],
+  "left_terminal": [
+    2,
+    3
+  ],
+  "right": [
+    {
+      "direction": "forward",
+      "kind": "analysis",
+      "name": "discover-history",
+      "rule": 0
+    },
+    {
+      "direction": "prophecy",
+      "kind": "analysis",
+      "name": "discover-prophecy",
+      "rule": 1
+    },
+    {
+      "kind": "rewrite",
+      "name": "simplify-and",
+      "rule": 0
+    },
+    {
+      "kind": "rewrite",
+      "name": "finish-or",
+      "rule": 2
+    }
+  ],
+  "right_terminal": [
+    3,
+    3
+  ],
+  "schema": "pvso-nonconfluence-witness-1"
+}

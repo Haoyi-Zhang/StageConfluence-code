@@ -1,0 +1,12 @@
+{
+  "cases": 2560900,
+  "incomplete_cases": 1280450,
+  "complete_unique_cases": 716302,
+  "complete_multiple_cases": 564148,
+  "formula_mismatches": 0,
+  "maximal_guard_checks": 82410,
+  "persistent_guard_checks": 82410,
+  "strict_transition_guard_advantage_emitters": 1136,
+  "ordered_map_pairs": 2737,
+  "named_lattices": 8
+}

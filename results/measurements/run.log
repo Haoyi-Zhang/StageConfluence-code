@@ -1,0 +1,204 @@
+{
+  "check": "repository-material-integrity",
+  "python_sources_parsed": 22,
+  "research_sources_present": 21,
+  "minimum_supplied_sources": 20,
+  "usage_document_present": true,
+  "errors": [],
+  "scope": "Documentation and source/configuration integrity only. Research programs, proofs and experiments are not executed."
+}
+{"cpu_seconds": 0, "family": "synthetic-gate", "instances": 1}
+{"cpu_seconds": 0, "family": "synthetic-gate", "instances": 1}
+{
+  "lattice": "C1",
+  "map_count": 1,
+  "first_map_start": 0,
+  "first_map_stop": 1,
+  "map_pairs": 1,
+  "cases": 4,
+  "wall_seconds": 0.00040599700000143457,
+  "cpu_seconds": 0.0002642550000000049,
+  "peak_rss_kib": 16332,
+  "workers": 1,
+  "children": 0,
+  "timeouts": 0,
+  "selection": "all ordered map pairs in the specified outer-index range; all binary emitters and guards",
+  "seeds": null
+}
+{
+  "lattice": "C2",
+  "map_count": 2,
+  "first_map_start": 0,
+  "first_map_stop": 2,
+  "map_pairs": 4,
+  "cases": 64,
+  "wall_seconds": 0.0008771450000040204,
+  "cpu_seconds": 0.0,
+  "peak_rss_kib": 16232,
+  "workers": 1,
+  "children": 0,
+  "timeouts": 0,
+  "selection": "all ordered map pairs in the specified outer-index range; all binary emitters and guards",
+  "seeds": null
+}
+{
+  "lattice": "C3",
+  "map_count": 5,
+  "first_map_start": 0,
+  "first_map_stop": 5,
+  "map_pairs": 25,
+  "cases": 1600,
+  "wall_seconds": 0.011152512999998976,
+  "cpu_seconds": 0.010599947999999998,
+  "peak_rss_kib": 16212,
+  "workers": 1,
+  "children": 0,
+  "timeouts": 0,
+  "selection": "all ordered map pairs in the specified outer-index range; all binary emitters and guards",
+  "seeds": null
+}
+{
+  "lattice": "C4",
+  "map_count": 14,
+  "first_map_start": 0,
+  "first_map_stop": 14,
+  "map_pairs": 196,
+  "cases": 50176,
+  "wall_seconds": 0.3079660920000009,
+  "cpu_seconds": 0.307667854,
+  "peak_rss_kib": 16360,
+  "workers": 1,
+  "children": 0,
+  "timeouts": 0,
+  "selection": "all ordered map pairs in the specified outer-index range; all binary emitters and guards",
+  "seeds": null
+}
+{
+  "lattice": "B2",
+  "map_count": 9,
+  "first_map_start": 0,
+  "first_map_stop": 9,
+  "map_pairs": 81,
+  "cases": 20736,
+  "wall_seconds": 0.12430488100000048,
+  "cpu_seconds": 0.124088136,
+  "peak_rss_kib": 16460,
+  "workers": 1,
+  "children": 0,
+  "timeouts": 0,
+  "selection": "all ordered map pairs in the specified outer-index range; all binary emitters and guards",
+  "seeds": null
+}
+{
+  "lattice": "C5",
+  "map_count": 42,
+  "first_map_start": 0,
+  "first_map_stop": 14,
+  "map_pairs": 588,
+  "cases": 602112,
+  "wall_seconds": 3.1304163060000008,
+  "cpu_seconds": 3.1282754560000003,
+  "peak_rss_kib": 16708,
+  "workers": 1,
+  "children": 0,
+  "timeouts": 0,
+  "selection": "all ordered map pairs in the specified outer-index range; all binary emitters and guards",
+  "seeds": null
+}
+{
+  "lattice": "C5",
+  "map_count": 42,
+  "first_map_start": 14,
+  "first_map_stop": 28,
+  "map_pairs": 588,
+  "cases": 602112,
+  "wall_seconds": 4.121352193999996,
+  "cpu_seconds": 4.119772031,
+  "peak_rss_kib": 16612,
+  "workers": 1,
+  "children": 0,
+  "timeouts": 0,
+  "selection": "all ordered map pairs in the specified outer-index range; all binary emitters and guards",
+  "seeds": null
+}
+{
+  "lattice": "C5",
+  "map_count": 42,
+  "first_map_start": 28,
+  "first_map_stop": 42,
+  "map_pairs": 588,
+  "cases": 602112,
+  "wall_seconds": 3.9571700540000023,
+  "cpu_seconds": 3.9559787820000003,
+  "peak_rss_kib": 16716,
+  "workers": 1,
+  "children": 0,
+  "timeouts": 0,
+  "selection": "all ordered map pairs in the specified outer-index range; all binary emitters and guards",
+  "seeds": null
+}
+{
+  "lattice": "M3",
+  "map_count": 15,
+  "first_map_start": 0,
+  "first_map_stop": 15,
+  "map_pairs": 225,
+  "cases": 230400,
+  "wall_seconds": 1.1084414900000041,
+  "cpu_seconds": 1.108316308,
+  "peak_rss_kib": 16360,
+  "workers": 1,
+  "children": 0,
+  "timeouts": 0,
+  "selection": "all ordered map pairs in the specified outer-index range; all binary emitters and guards",
+  "seeds": null
+}
+{
+  "lattice": "N5",
+  "map_count": 21,
+  "first_map_start": 0,
+  "first_map_stop": 21,
+  "map_pairs": 441,
+  "cases": 451584,
+  "wall_seconds": 2.322655331000007,
+  "cpu_seconds": 2.3223544179999998,
+  "peak_rss_kib": 16468,
+  "workers": 1,
+  "children": 0,
+  "timeouts": 0,
+  "selection": "all ordered map pairs in the specified outer-index range; all binary emitters and guards",
+  "seeds": null
+}
+{
+  "cases": 2560900,
+  "incomplete_cases": 1280450,
+  "complete_unique_cases": 716302,
+  "complete_multiple_cases": 564148,
+  "formula_mismatches": 0,
+  "maximal_guard_checks": 82410,
+  "persistent_guard_checks": 82410,
+  "strict_transition_guard_advantage_emitters": 1136,
+  "ordered_map_pairs": 2737,
+  "named_lattices": 8
+}
+{"cpu_seconds": 0.001997818, "family": "A-C2-one-rewrite", "instances": 32}
+{"cpu_seconds": 0.038996258, "family": "A-C3-one-rewrite", "instances": 1000}
+{"cpu_seconds": 0.468889047, "family": "A-B2-one-rewrite", "instances": 11664}
+{"cpu_seconds": 0.023000791, "family": "B-C2-fork", "instances": 512}
+{"cpu_seconds": 13.867171544, "family": "B-B2-fork", "instances": 262144}
+{"cpu_seconds": 15.731629738, "family": "C-B2-diamond", "instances": 160000}
+{"cpu_seconds": 0.79485065, "family": "D-B2-two-analysis", "instances": 16384}
+{"family": "A-C2-one-rewrite", "field_mismatches": 0, "instances_checked": 32}
+{"family": "A-C3-one-rewrite", "field_mismatches": 0, "instances_checked": 1000}
+{"family": "A-B2-one-rewrite", "field_mismatches": 0, "instances_checked": 11664}
+{"family": "B-C2-fork", "field_mismatches": 0, "instances_checked": 512}
+{"family": "B-B2-fork", "field_mismatches": 0, "instances_checked": 262144}
+{"family": "C-B2-diamond", "field_mismatches": 0, "instances_checked": 160000}
+{"family": "D-B2-two-analysis", "field_mismatches": 0, "instances_checked": 16384}
+{"field_comparisons": 4065624, "field_mismatches": 0, "instances_checked": 451736}
+{"accepted": 0, "basis": "single-field mutations of S01 certificate and all retained negative witnesses", "cases": 9, "mutations": 72, "rejected": 72, "schema": "pvso-mutation-campaign-1"}
+{
+  "deterministic_files_compared": 94,
+  "equal": true,
+  "resources_compared": false
+}

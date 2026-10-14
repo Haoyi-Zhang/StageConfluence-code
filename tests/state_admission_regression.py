@@ -320,7 +320,11 @@ class AdmissionRegression(unittest.TestCase):
             row["measure"] = float(row["measure"])
             row["extra-uninterpreted-field"] = []
         expected = verify_confluence_certificate(instance, cert)
-        self.assertEqual(verify_confluence_certificate(instance, altered), expected)
+        # The current schema enforces integer IDs/measures rather than Python
+        # numeric equality. Historical acceptance was a format ambiguity, not
+        # a demonstrated false confluence theorem.
+        with self.assertRaises(ValueError):
+            verify_confluence_certificate(instance, altered)
         self.assertEqual(verify_confluence_certificate(instance, cert), expected)
         other = load_staged_instance(chain_case(facts=1))
         other_cert = make_confluence_certificate(other)
@@ -343,6 +347,20 @@ class AdmissionRegression(unittest.TestCase):
 
 
 if __name__ == "__main__":
+    import argparse
+    import time
+    from src.runtime_support import peak_rss_kib
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--out', type=Path)
+    args = parser.parse_args()
+    cpu_start, wall_start = time.process_time(), time.perf_counter()
     result = unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromTestCase(AdmissionRegression))
-    print(json.dumps({"tests": result.testsRun, "successful": result.wasSuccessful(), "finite_counts": COUNTS}, sort_keys=True))
+    summary = {"tests": result.testsRun, "successful": result.wasSuccessful(), "finite_counts": COUNTS}
+    if args.out:
+        args.out.parent.mkdir(parents=True, exist_ok=True)
+        args.out.write_text(json.dumps(summary, indent=2, sort_keys=True)+'\n', encoding='utf-8')
+        args.out.with_name('admission-resources.json').write_text(json.dumps(dict(
+            cpu_seconds=time.process_time()-cpu_start, wall_seconds=time.perf_counter()-wall_start,
+            peak_rss_kib=peak_rss_kib()), indent=2)+'\n', encoding='utf-8')
+    print(json.dumps(summary, sort_keys=True))
     sys.exit(0 if result.wasSuccessful() else 1)
