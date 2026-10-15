@@ -4,8 +4,9 @@
 
 Required:
 
-- Linux or another POSIX system that supports Python `resource` limits;
 - Python 3.10 or newer;
+- Linux/POSIX with Python `resource` support for the default complete driver,
+  or Windows with the explicit `--portable` option;
 - no third-party Python packages;
 - enough writable space for about 10 MiB of outputs.
 
@@ -27,12 +28,16 @@ as well; these are mode checks, not additional scientific systems.
 
 ```sh
 python staged_check.py analyze staged_cases/S01.json
-python staged_check.py certify staged_cases/S01.json --out /tmp/S01-certificate.json
-python staged_check.py verify-certificate staged_cases/S01.json /tmp/S01-certificate.json
+python -B staged_check.py certify staged_cases/S01.json --out ../stageconfluence-smoke/S01-certificate.json
+python -B staged_check.py verify-certificate staged_cases/S01.json ../stageconfluence-smoke/S01-certificate.json
 
-python staged_check.py witness staged_cases/S02.json --out /tmp/S02-witness.json
-python staged_check.py verify-witness staged_cases/S02.json /tmp/S02-witness.json
+python -B staged_check.py witness staged_cases/S02.json --out ../stageconfluence-smoke/S02-witness.json
+python -B staged_check.py verify-witness staged_cases/S02.json ../stageconfluence-smoke/S02-witness.json
 ```
+
+Choose a fresh writable output directory outside the checkout; replace
+`../stageconfluence-smoke` consistently if needed. Named-case checks do not
+require POSIX resource support. The `/tmp/` paths below are POSIX examples.
 
 `S01` is the positive bidirectional diamond. `S02` is a rewrite-peak failure. Other retained cases are documented in `staged_cases/` and `results/staged/case-summary.json`.
 

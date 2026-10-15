@@ -67,11 +67,15 @@ From this directory:
 ```sh
 python -m unittest discover -s tests -v
 python staged_check.py analyze staged_cases/S01.json
-python staged_check.py certify staged_cases/S01.json --out /tmp/S01-certificate.json
-python staged_check.py verify-certificate staged_cases/S01.json /tmp/S01-certificate.json
-python staged_check.py witness staged_cases/S02.json --out /tmp/S02-witness.json
-python staged_check.py verify-witness staged_cases/S02.json /tmp/S02-witness.json
+python -B staged_check.py certify staged_cases/S01.json --out ../stageconfluence-smoke/S01-certificate.json
+python -B staged_check.py verify-certificate staged_cases/S01.json ../stageconfluence-smoke/S01-certificate.json
+python -B staged_check.py witness staged_cases/S02.json --out ../stageconfluence-smoke/S02-witness.json
+python -B staged_check.py verify-witness staged_cases/S02.json ../stageconfluence-smoke/S02-witness.json
 ```
+
+Choose a fresh writable `../stageconfluence-smoke` directory outside the
+checkout, or replace that path throughout. These named-case commands work on
+Windows as well as POSIX; `/tmp/` paths elsewhere are POSIX examples.
 
 Positive certificate replay reports two distinct semantic properties:
 
